@@ -1,4 +1,5 @@
 import Http from '../services/HttpService';
+import LocalStorageService from '../services/LocalStorageService';
 
 class AuthService {
   constructor() {
@@ -6,7 +7,6 @@ class AuthService {
   }
 
   isLoggedIn() {
-    console.log('isLoggedIn', this.user !== null);
     return this.user !== null;
   }
 
@@ -30,9 +30,23 @@ class AuthService {
   getCurrent() {
     return Http.get('http://localhost:3000/api/users/current')
     .then(res => {
-      console.log('getcurrent', res);
+      this.user = res;
     })
     .catch(error => console.error('AuthService -> loginWithCredentials:', error));
+  }
+
+  preAuthenticate() {
+    return new Promise((resolve) => {
+      const token = LocalStorageService.getToken();
+      if (!token) {
+        resolve();
+      } else {
+        Http.setAuthToken(token);
+        this.getCurrent()
+          .then(() => resolve())
+          .catch(() => resolve());
+      }
+    })
   }
 
 }

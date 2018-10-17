@@ -6,7 +6,6 @@ class HttpService {
   }
 
   setAuthToken(token) {
-    console.log(token);
     this.config = {
       headers: {
           'x-auth': token,

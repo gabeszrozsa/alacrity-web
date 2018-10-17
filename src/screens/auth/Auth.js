@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Login from './Login';
 import { Row, Col, Form } from 'antd';
+import Login from './Login';
 
 export default class Auth extends Component {
   render() {

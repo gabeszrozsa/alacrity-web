@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import Auth from '../../api/AuthService';
+import { Redirect } from 'react-router-dom'
 
 import './login.css';
 const FormItem = Form.Item;
@@ -12,8 +13,7 @@ export default class Login extends React.Component {
       if (!err) {
         Auth.loginWithCredentials(values.email, values.password)
         .then(() => {
-          console.log(this.props);
-          // Auth.getCurrent();
+          return (<Redirect to={{ pathname: '/' }} />);
         })
       }
     });

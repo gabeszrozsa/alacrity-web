@@ -4,9 +4,10 @@ import { Redirect, Route } from 'react-router-dom'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const isLoggedIn = AuthService.isLoggedIn();
+  console.log(isLoggedIn);
 
   return (
-    <Route {...rest} exact render={props => isLoggedIn ?
+    <Route {...rest} render={props => isLoggedIn ?
       (<Component {...props} />) :
       (<Redirect to={{ pathname: '/login', state: { from: props.location } }} />)
     }/>
