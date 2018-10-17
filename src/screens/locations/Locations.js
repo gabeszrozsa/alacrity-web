@@ -1,34 +1,58 @@
 import React from 'react'
-import { Card, Button } from 'antd';
+import { Button } from 'antd';
 import { Link } from 'react-router-dom'
 
-const { Meta } = Card;
+import { LocationService } from '../../api';
+import { LoadingBar } from '../../layout';
+import LocationThumbnail from './LocationThumbnail';
 
 export default class Locations extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      isFetching: true,
+      locations: []
+    }
+  }
+
+  componentDidMount() {
+    LocationService.getAllLocations().then(locations => this.setState({
+      isFetching: false,
+      locations: locations
+    }));
+  }
+
+  renderLocations() {
+    let content;
+    if (this.state.isFetching) {
+      content = (<LoadingBar text="Fetching locations..."/>);
+    } else {
+
+      // TODO: empty text msg
+      content = this.state.locations.map(loc => (
+        <Link key={loc._id} to={'/locations/' + loc._id}>
+          <LocationThumbnail loc={loc}/>
+        </Link>)
+      );
+    }
+    return content;
+  }
+
   render () {
-    const buttonStyle = {
-      marginRight: '10px',
-      marginBottom: '40px'
-    };
+    const Locations = this.renderLocations();
+
+    // TODO: layout!!
 
     return (
       <React.Fragment>
         <Link to="/locations/add">
-          <Button style={buttonStyle} type="primary" icon="pushpin" size='large'>
+          <Button className='add-button' type="primary" icon="pushpin" size='large'>
             Helyszín hozzáadása
           </Button>
         </Link>
 
-        <Card
-          hoverable
-          style={{ width: 240 }}
-          cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
-        >
-          <Meta
-            title="Europe Street beat"
-            description="www.instagram.com"
-          />
-        </Card>
+        { Locations }
+
       </React.Fragment>
     )
   }

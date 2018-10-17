@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form, Input, Button, Divider, Icon } from 'antd';
+import { LocationService } from '../../api';
 
 const FormItem = Form.Item;
 
@@ -8,7 +9,7 @@ export default class AddLocation extends React.Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        LocationService.addNewLocation(values).then(id => console.log(id));
       }
     });
   }
@@ -48,16 +49,16 @@ export default class AddLocation extends React.Component {
         <Form onSubmit={this.handleSubmit}>
 
           <FormItem {...formItemLayout} label={'Név'}>
-            {getFieldDecorator('nickname', {
-              rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
+            {getFieldDecorator('name', {
+              rules: [{ required: true, message: 'Please input your név!', whitespace: true }],
             })(
               <Input />
             )}
           </FormItem>
 
           <FormItem {...formItemLayout} label={'Koordináták'}>
-            {getFieldDecorator('nickname', {
-              rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
+            {getFieldDecorator('coordinates', {
+              rules: [{ required: true, message: 'Please input your Koordináták!', whitespace: true }],
             })(
               <Input />
             )}

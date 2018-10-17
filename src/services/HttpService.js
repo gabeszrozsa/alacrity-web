@@ -24,6 +24,12 @@ class HttpService {
       .then(response => response.data)
       .catch(error => Promise.reject(error));
   }
+
+  delete(url) {
+    return axios.delete(url, this.config)
+      .then(response => response.data)
+      .catch(error => Promise.reject(error));
+  }
 }
 
 const instance = new HttpService();
