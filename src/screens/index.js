@@ -5,6 +5,7 @@ import AddEvent from './events/AddEvent';
 
 import Locations from './locations/Locations';
 import AddLocation from './locations/AddLocation';
+import EditLocation from './locations/EditLocation';
 import LocationDetails from './locations/LocationDetails';
 
 import Activities from './activities/Activities';
@@ -19,6 +20,7 @@ export {
   AddEvent,
   Locations,
   AddLocation,
+  EditLocation,
   LocationDetails,
   Activities,
   AddActivityType,

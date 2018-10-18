@@ -4,10 +4,7 @@ const BASE_URL = 'http://localhost:3000/api/location';
 
 class LocationService {
   addNewLocation(data) {
-    return Http.post(BASE_URL, {
-      name: data.name,
-      coordinates: data.coordinates,
-    })
+    return Http.post(BASE_URL, data)
     .then(res => res)
     .catch(error => console.error('LocationService -> addNewLocation:', error));
   }
@@ -28,6 +25,12 @@ class LocationService {
     return Http.delete(`${BASE_URL}/${id}`)
     .then(res => res)
     .catch(error => console.error('LocationService -> deleteLocation:', error));
+  }
+
+  updateLocation(id, data) {
+    return Http.patch(`${BASE_URL}/${id}`, data)
+    .then(res => res)
+    .catch(error => console.error('LocationService -> updateLocation:', error));
   }
 }
 

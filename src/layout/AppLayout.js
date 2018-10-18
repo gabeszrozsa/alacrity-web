@@ -3,7 +3,7 @@ import { Layout, Form } from 'antd';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 import { AppLayoutMenu, AppLayoutHeader, PrivateRoute } from './';
-import { NewsFeed, Events, AddEvent, Locations, AddLocation, LocationDetails, Activities, AddActivityType, Auth } from '../screens';
+import { NewsFeed, Events, AddEvent, Locations, AddLocation, EditLocation, LocationDetails, Activities, AddActivityType, Auth } from '../screens';
 
 import AuthService from '../api/AuthService'
 
@@ -27,6 +27,7 @@ export default class AppLayout extends React.Component {
     const AddActivityTypeForm = Form.create()(AddActivityType);
     const AddEventForm = Form.create()(AddEvent);
     const AddLocationForm = Form.create()(AddLocation);
+    const EditLocationForm = Form.create()(EditLocation);
     const isLoggedIn = AuthService.isLoggedIn();
 
     return (
@@ -51,6 +52,7 @@ export default class AppLayout extends React.Component {
               <PrivateRoute exact path="/events/add" component={AddEventForm} />
               <PrivateRoute exact path="/locations" component={Locations} />
               <PrivateRoute exact path="/locations/add" component={AddLocationForm} />
+              <PrivateRoute exact path="/locations/edit/:id" component={EditLocationForm} />
               <PrivateRoute exact path="/locations/:id" component={LocationDetails} />
               <PrivateRoute exact path="/activities" component={Activities} />
               <PrivateRoute exact path="/activities/add" component={AddActivityTypeForm} />

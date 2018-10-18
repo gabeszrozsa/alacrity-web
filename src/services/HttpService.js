@@ -25,6 +25,12 @@ class HttpService {
       .catch(error => Promise.reject(error));
   }
 
+  patch(url, data) {
+    return axios.patch(url, data, this.config)
+      .then(response => response.data)
+      .catch(error => Promise.reject(error));
+  }
+
   delete(url) {
     return axios.delete(url, this.config)
       .then(response => response.data)

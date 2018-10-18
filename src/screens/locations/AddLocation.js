@@ -58,7 +58,7 @@ export default class AddLocation extends React.Component {
 
           <FormItem {...formItemLayout} label={'Koordináták'}>
             {getFieldDecorator('coordinates', {
-              rules: [{ required: true, message: 'Please input your Koordináták!', whitespace: true }],
+              rules: [{ message: 'Please input your Koordináták!', whitespace: true }],
             })(
               <Input />
             )}
