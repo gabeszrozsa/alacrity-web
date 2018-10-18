@@ -1,94 +1,63 @@
 import React from 'react'
-import { Form, Input, Button, Divider, Select, DatePicker, Icon } from 'antd';
-
-const FormItem = Form.Item;
-const Option = Select.Option;
+import { Divider, Icon, message } from 'antd';
+import { EventService, LocationService } from '../../api';
+import { LoadingBar } from '../../layout';
+import EventForm from './EventForm';
 
 export default class AddEvent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      isFetching: true,
+      locations: []
+    };
+  }
+
+  componentDidMount() {
+    LocationService.getAllLocations().then(locations => this.setState({
+      isFetching: false,
+      locations: locations
+    }));
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, fieldsValue) => {
       if (!err) {
         const values = {
           ...fieldsValue,
-          'date-time-picker': fieldsValue['date-time-picker'].format('YYYY-MM-DD HH:mm:ss'),
+          'date': fieldsValue['date'].toISOString(),
         };
-        console.log('Received values of form: ', values);
+
+        EventService.addNewEvent(values).then(id => {
+          const redirectUrl = `/events/${id}`;
+          message.info('Esemény létrehozva!');
+          this.props.history.push(redirectUrl);
+        });
       }
     });
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    if (this.state.isFetching) {
+      return (<LoadingBar text="Betöltés..."/>);
+    } else {
+      return (
+        <React.Fragment>
+          <Divider>
+            <Icon type="schedule" theme="outlined" style={{marginRight: '5px'}}/>
+            Esemény szervezése
+          </Divider>
 
-    const formItemLayout = {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 },
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 8 },
-      },
-    };
-    const tailFormItemLayout = {
-      wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0,
-        },
-        sm: {
-          span: 16,
-          offset: 8,
-        },
-      },
-    };
+          <EventForm
+            form={this.props.form}
+            handleSubmit={this.handleSubmit}
+            locations={this.state.locations}
+            buttonText={'Létrehozás'}
+          />
 
-    return (
-      <React.Fragment>
-        <Divider>
-          <Icon type="schedule" theme="outlined" style={{marginRight: '5px'}}/>
-          Esemény szervezése
-        </Divider>
-        <Form onSubmit={this.handleSubmit}>
-
-          <FormItem {...formItemLayout} label='Az esemény megnevezése'>
-            {getFieldDecorator('nickname', {
-              rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
-            })(
-              <Input />
-            )}
-          </FormItem>
-
-          <FormItem {...formItemLayout} label='Helyszín' hasFeedback
-          >
-            {getFieldDecorator('select', {
-              rules: [
-                { required: true, message: 'Please select your country!' },
-              ],
-            })(
-              <Select placeholder="Válassz egy helyszínt!">
-                <Option value="x">Margit-sziget</Option>
-                <Option value="x">Feneketlen-tó</Option>
-                <Option value="x">Dunapart</Option>
-              </Select>
-            )}
-          </FormItem>
-
-          <FormItem {...formItemLayout} label='Időpont'
-          >
-            {getFieldDecorator('date-time-picker', {
-              rules: [{ type: 'object', required: true, message: 'Please select time!' }]
-            })(
-              <DatePicker placeholder="Válassz időpontot!" showTime format="YYYY-MM-DD HH:mm:ss" />
-            )}
-          </FormItem>
-
-          <FormItem {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit">Létrehozás</Button>
-          </FormItem>
-        </Form>
-      </React.Fragment>
-    );
+        </React.Fragment>
+      );
+    }
   }
 }

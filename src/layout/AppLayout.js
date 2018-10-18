@@ -50,6 +50,8 @@ export default class AppLayout extends React.Component {
               )} />
               <PrivateRoute exact path="/events" component={Events} />
               <PrivateRoute exact path="/events/add" component={AddEventForm} />
+              <PrivateRoute exact path="/events/edit/:id" component={Events} />
+              <PrivateRoute exact path="/events/:id" component={Events} />
               <PrivateRoute exact path="/locations" component={Locations} />
               <PrivateRoute exact path="/locations/add" component={AddLocationForm} />
               <PrivateRoute exact path="/locations/edit/:id" component={EditLocationForm} />

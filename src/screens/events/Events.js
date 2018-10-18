@@ -2,34 +2,56 @@ import React from 'react'
 import { Button } from 'antd';
 import { Link } from 'react-router-dom'
 
-// const { Meta } = Card;
+import { EventService } from '../../api';
+import { LoadingBar } from '../../layout';
+import EventThumbnail from './EventThumbnail';
 
 export default class Events extends React.Component {
-  render () {
-    const buttonStyle = {
-      marginRight: '10px',
-      marginBottom: '40px'
-    };
+  constructor() {
+    super();
+    this.state = {
+      isFetching: true,
+      events: []
+    }
+  }
 
+  componentDidMount() {
+    EventService.getAllEvents().then(events => this.setState({
+      isFetching: false,
+      events: events
+    }));
+  }
+
+  renderEvents() {
+    let content;
+    if (this.state.isFetching) {
+      content = (<LoadingBar text="Helyszínek betöltése..."/>);
+    } else {
+
+      // TODO: empty text msg
+      content = this.state.events.map(ev => (
+          <EventThumbnail key={ev._id} ev={ev}/>
+      ));
+    }
+    return content;
+  }
+
+  render () {
+    const Events = this.renderEvents();
+
+    // TODO: layout!!
+    //
     return (
       <React.Fragment>
         <Link to="/events/add">
-          <Button style={buttonStyle} type="primary" icon="schedule" size='large'>
+          <Button className='add-button' type="primary" icon="schedule" size='large'>
             Esemény szervezése
           </Button>
         </Link>
 
+        { Events }
 
-        {/*}<Card
-          hoverable
-          style={{ width: 240 }}
-          cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
-          >
-          <Meta
-            title="Europe Street beat"
-            description="www.instagram.com"
-            />
-        </Card>*/}
+
       </React.Fragment>
     )
   }
