@@ -17,6 +17,6 @@ export default class App extends Component {
   }
 
   render() {
-    return this.state.isAuthenticating ? (<LoadingBar text="Trying to authenticate..."/>) : (<AppLayout/>);
+    return this.state.isAuthenticating ? (<LoadingBar text="Bejelentkezés..."/>) : (<AppLayout/>);
   }
 }

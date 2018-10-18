@@ -25,15 +25,13 @@ export default class Locations extends React.Component {
   renderLocations() {
     let content;
     if (this.state.isFetching) {
-      content = (<LoadingBar text="Fetching locations..."/>);
+      content = (<LoadingBar text="Helyszínek betöltése..."/>);
     } else {
 
       // TODO: empty text msg
       content = this.state.locations.map(loc => (
-        <Link key={loc._id} to={'/locations/' + loc._id}>
-          <LocationThumbnail loc={loc}/>
-        </Link>)
-      );
+          <LocationThumbnail key={loc._id} loc={loc}/>
+      ));
     }
     return content;
   }
