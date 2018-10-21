@@ -2,55 +2,54 @@ import React from 'react'
 import { Button } from 'antd';
 import { Link } from 'react-router-dom'
 
-import { EventService } from '../../api';
+import { LocationService } from '../../api';
 import { LoadingBar } from '../../layout';
-import EventThumbnail from './EventThumbnail';
+import LocationThumbnail from './LocationThumbnail';
 
-export default class Events extends React.Component {
+export default class LocationList extends React.Component {
   constructor() {
     super();
     this.state = {
       isFetching: true,
-      events: []
+      locations: []
     }
   }
 
   componentDidMount() {
-    EventService.getAllEvents().then(events => this.setState({
+    LocationService.getAllLocations().then(locations => this.setState({
       isFetching: false,
-      events: events
+      locations: locations
     }));
   }
 
-  renderEvents() {
+  renderLocations() {
     let content;
     if (this.state.isFetching) {
       content = (<LoadingBar text="Helyszínek betöltése..."/>);
     } else {
 
       // TODO: empty text msg
-      content = this.state.events.map(ev => (
-          <EventThumbnail key={ev._id} ev={ev}/>
+      content = this.state.locations.map(loc => (
+          <LocationThumbnail key={loc._id} loc={loc}/>
       ));
     }
     return content;
   }
 
   render () {
-    const Events = this.renderEvents();
+    const Locations = this.renderLocations();
 
     // TODO: layout!!
-    //
+
     return (
       <React.Fragment>
-        <Link to="/events/add">
-          <Button className='add-button' type="primary" icon="schedule" size='large'>
-            Esemény szervezése
+        <Link to="/locations/add">
+          <Button className='add-button' type="primary" icon="pushpin" size='large'>
+            Helyszín hozzáadása
           </Button>
         </Link>
 
-        { Events }
-
+        { Locations }
 
       </React.Fragment>
     )

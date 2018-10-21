@@ -3,7 +3,11 @@ import { Layout, Form } from 'antd';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 import { AppLayoutMenu, AppLayoutHeader, PrivateRoute } from './';
-import { NewsFeed, Events, AddEvent, Locations, AddLocation, EditLocation, LocationDetails, Activities, AddActivityType, Auth } from '../screens';
+import { NewsFeed,
+  EventList, AddEvent, EditEvent,
+  Locations,
+  Activities, AddActivityType, Auth } from '../screens';
+
 
 import AuthService from '../api/AuthService'
 
@@ -26,8 +30,9 @@ export default class AppLayout extends React.Component {
   render() {
     const AddActivityTypeForm = Form.create()(AddActivityType);
     const AddEventForm = Form.create()(AddEvent);
-    const AddLocationForm = Form.create()(AddLocation);
-    const EditLocationForm = Form.create()(EditLocation);
+    const EditEventForm = Form.create()(EditEvent);
+    const AddLocationForm = Form.create()(Locations.Add);
+    const EditLocationForm = Form.create()(Locations.Edit);
     const isLoggedIn = AuthService.isLoggedIn();
 
     return (
@@ -48,14 +53,14 @@ export default class AppLayout extends React.Component {
               <Route path="/login"  render={() => (
                 isLoggedIn ? (<Redirect to="/"/>) : (<Auth/>)
               )} />
-              <PrivateRoute exact path="/events" component={Events} />
+              <PrivateRoute exact path="/events" component={EventList} />
               <PrivateRoute exact path="/events/add" component={AddEventForm} />
-              <PrivateRoute exact path="/events/edit/:id" component={Events} />
-              <PrivateRoute exact path="/events/:id" component={Events} />
-              <PrivateRoute exact path="/locations" component={Locations} />
+              <PrivateRoute exact path="/events/edit/:id" component={EditEventForm} />
+              <PrivateRoute exact path="/events/:id" component={EventList} />
+              <PrivateRoute exact path="/locations" component={Locations.List} />
               <PrivateRoute exact path="/locations/add" component={AddLocationForm} />
               <PrivateRoute exact path="/locations/edit/:id" component={EditLocationForm} />
-              <PrivateRoute exact path="/locations/:id" component={LocationDetails} />
+              <PrivateRoute exact path="/locations/:id" component={Locations.Details} />
               <PrivateRoute exact path="/activities" component={Activities} />
               <PrivateRoute exact path="/activities/add" component={AddActivityTypeForm} />
               <PrivateRoute exact path="/activities/add-type" component={AddActivityTypeForm} />
