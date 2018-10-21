@@ -21,6 +21,7 @@ class AuthService {
       const tokenLength = user.tokens.length;
       const lastToken = user.tokens[tokenLength - 1];
       Http.setAuthToken(lastToken.token);
+      LocalStorageService.storeToken(lastToken.token);
 
       Promise.resolve();
     })
