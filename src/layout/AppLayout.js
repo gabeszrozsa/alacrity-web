@@ -18,7 +18,7 @@ export default class AppLayout extends React.Component {
   constructor() {
     super();
     this.state = {
-      collapsed: true,
+      collapsed: false,
     };
   }
 
@@ -30,6 +30,9 @@ export default class AppLayout extends React.Component {
   render() {
     const AddActivityTypeForm = Form.create()(ActivityTypes.Add);
     const EditActivityTypeForm = Form.create()(ActivityTypes.Edit);
+
+    const AddActivityForm = Form.create()(Activities.Add);
+    const EditActivityForm = Form.create()(Activities.Edit);
 
     const AddEventForm = Form.create()(AddEvent);
     const EditEventForm = Form.create()(EditEvent);
@@ -61,16 +64,22 @@ export default class AppLayout extends React.Component {
               <PrivateRoute exact path="/events/add" component={AddEventForm} />
               <PrivateRoute exact path="/events/edit/:id" component={EditEventForm} />
               <PrivateRoute exact path="/events/:id" component={EventList} />
+
               <PrivateRoute exact path="/locations" component={Locations.List} />
               <PrivateRoute exact path="/locations/add" component={AddLocationForm} />
               <PrivateRoute exact path="/locations/edit/:id" component={EditLocationForm} />
               <PrivateRoute exact path="/locations/:id" component={Locations.Details} />
-              <PrivateRoute exact path="/activities" component={Activities} />
-              <PrivateRoute exact path="/activities/add" component={Activities} />
+
+              <PrivateRoute exact path="/activity" component={Activities.List} />
+              <PrivateRoute exact path="/activity/add" component={AddActivityForm} />
+              <PrivateRoute exact path="/activity/edit/:id" component={EditActivityForm} />
+              <PrivateRoute exact path="/activity/:id" component={Activities.Details} />
+
               <PrivateRoute exact path="/activity-types" component={ActivityTypes.List} />
               <PrivateRoute exact path="/activity-types/add" component={AddActivityTypeForm} />
               <PrivateRoute exact path="/activity-types/edit/:id" component={EditActivityTypeForm} />
               <PrivateRoute exact path="/activity-types/:id" component={ActivityTypes.Details} />
+
               <PrivateRoute exact path="/" component={NewsFeed} />
             </Switch>
 

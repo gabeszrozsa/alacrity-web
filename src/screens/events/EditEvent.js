@@ -21,7 +21,6 @@ export default class EditEvent extends React.Component {
       this.fetchEvent(),
       this.fetchLocations()
     ]).then(res => this.setState({ isFetching: false }))
-
   }
 
   fetchLocations = () => {

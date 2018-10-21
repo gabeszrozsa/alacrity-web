@@ -12,12 +12,12 @@ export default class Activities extends React.Component {
     return (
       <React.Fragment>
 
-        <Link to="/activities/add">
+        <Link to="/activity/add">
          <Button style={buttonStyle} type="primary" icon="plus" size='large'>
              Tevékenység rögzítése
          </Button>
        </Link>
-       <Link to="/activities/add-type">
+       <Link to="/activity/add-type">
          <Button style={buttonStyle} type="primary" icon="crown" size='large'>
              Sportág rögzítése
          </Button>

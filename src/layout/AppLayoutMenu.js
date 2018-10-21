@@ -16,7 +16,7 @@ export default class AppLayoutMenu extends React.Component {
             </Menu.Item>
 
             <Menu.Item key="2">
-              <Link to="/activities">
+              <Link to="/activity">
               <Icon type="trophy" />
               <span>Aktivitás</span>
             </Link>

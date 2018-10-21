@@ -8,7 +8,7 @@ import Locations from './locations/';
 
 import ActivityTypes from './activity-types/';
 
-import Activities from './activities/Activities';
+import Activities from './activity/';
 
 import Auth from './auth/Auth';
 import Login from './auth/Login';
