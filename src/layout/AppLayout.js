@@ -6,7 +6,7 @@ import { AppLayoutMenu, AppLayoutHeader, PrivateRoute } from './';
 import { NewsFeed,
   EventList, AddEvent, EditEvent,
   Locations,
-  Activities, AddActivityType, Auth } from '../screens';
+  Activities, ActivityTypes, Auth } from '../screens';
 
 
 import AuthService from '../api/AuthService'
@@ -28,11 +28,15 @@ export default class AppLayout extends React.Component {
   }
 
   render() {
-    const AddActivityTypeForm = Form.create()(AddActivityType);
+    const AddActivityTypeForm = Form.create()(ActivityTypes.Add);
+    const EditActivityTypeForm = Form.create()(ActivityTypes.Edit);
+
     const AddEventForm = Form.create()(AddEvent);
     const EditEventForm = Form.create()(EditEvent);
+
     const AddLocationForm = Form.create()(Locations.Add);
     const EditLocationForm = Form.create()(Locations.Edit);
+
     const isLoggedIn = AuthService.isLoggedIn();
 
     return (
@@ -62,8 +66,11 @@ export default class AppLayout extends React.Component {
               <PrivateRoute exact path="/locations/edit/:id" component={EditLocationForm} />
               <PrivateRoute exact path="/locations/:id" component={Locations.Details} />
               <PrivateRoute exact path="/activities" component={Activities} />
-              <PrivateRoute exact path="/activities/add" component={AddActivityTypeForm} />
-              <PrivateRoute exact path="/activities/add-type" component={AddActivityTypeForm} />
+              <PrivateRoute exact path="/activities/add" component={Activities} />
+              <PrivateRoute exact path="/activity-types" component={ActivityTypes.List} />
+              <PrivateRoute exact path="/activity-types/add" component={AddActivityTypeForm} />
+              <PrivateRoute exact path="/activity-types/edit/:id" component={EditActivityTypeForm} />
+              <PrivateRoute exact path="/activity-types/:id" component={ActivityTypes.Details} />
               <PrivateRoute exact path="/" component={NewsFeed} />
             </Switch>
 

@@ -6,8 +6,9 @@ import EditEvent from './events/EditEvent';
 
 import Locations from './locations/';
 
+import ActivityTypes from './activity-types/';
+
 import Activities from './activities/Activities';
-import AddActivityType from './activities/AddActivityType';
 
 import Auth from './auth/Auth';
 import Login from './auth/Login';
@@ -18,8 +19,8 @@ export {
   AddEvent,
   EditEvent,
   Locations,
+  ActivityTypes,
   Activities,
-  AddActivityType,
   Auth,
   Login
 };

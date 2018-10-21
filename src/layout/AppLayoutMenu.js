@@ -23,20 +23,27 @@ export default class AppLayoutMenu extends React.Component {
             </Menu.Item>
 
             <Menu.Item key="3">
+              <Link to="/activity-types">
+              <Icon type="crown" />
+              <span>Sportágak</span>
+            </Link>
+            </Menu.Item>
+
+            <Menu.Item key="4">
               <Link to="/events">
               <Icon type="calendar" />
               <span>Események</span>
             </Link>
             </Menu.Item>
 
-            <Menu.Item key="4">
+            <Menu.Item key="5">
               <Link to="/notifications">
               <Icon type="notification" theme="outlined" />
               <span>Értesítések</span>
             </Link>
             </Menu.Item>
 
-            <Menu.Item key="5">
+            <Menu.Item key="6">
               <Link to="/locations">
               <Icon type="environment" />
               <span>Helyszínek</span>
