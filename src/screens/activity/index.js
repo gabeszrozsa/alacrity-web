@@ -1,7 +1,7 @@
-import ActivityList from './ActivityList';
+import ActivityList from './list/ActivityList';
 import AddActivity from './AddActivity';
 import EditActivity from './EditActivity';
-import ActivityDetails from './ActivityDetails';
+import ActivityDetails from './details/ActivityDetails';
 
 const activities = {
   List: ActivityList,

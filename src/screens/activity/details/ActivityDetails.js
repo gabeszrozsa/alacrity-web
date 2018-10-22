@@ -1,7 +1,9 @@
 import React from 'react'
+import { message } from 'antd';
 
-import { ActivityService } from '../../api';
-import { LoadingBar } from '../../layout';
+import { ActivityService } from '../../../api';
+import { LoadingBar } from '../../../layout';
+import ActivityDetailsPane from './ActivityDetailsPane';
 
 export default class ActivityDetails extends React.Component {
   constructor() {
@@ -20,23 +22,27 @@ export default class ActivityDetails extends React.Component {
     }));
   }
 
+  onDeleteActivity = () => {
+    ActivityService.deleteActivity(this.state.activity._id)
+      .then(res => {
+        message.success('Tevékenység törölve!');
+        this.props.history.push('/activity');
+      })
+  }
+
   renderActivity() {
     let content;
     if (this.state.isFetching) {
       content = (<LoadingBar text="Tevékenység betöltése..."/>);
     } else {
       // TODO: empty text msg
-      content =
-        <p key={this.state.activity._id}>
-          {this.state.activity.name}
-        </p>;
+      content = <ActivityDetailsPane activity={this.state.activity} onDeleteActivity={this.onDeleteActivity}/>
     }
     return content;
   }
 
   render () {
     const Activity = this.renderActivity();
-
     return (Activity);
   }
 }

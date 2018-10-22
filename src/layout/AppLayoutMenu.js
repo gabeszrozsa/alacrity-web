@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Icon } from 'antd';
+import { Menu, Icon, Badge } from 'antd';
 import { Link } from 'react-router-dom'
 // const SubMenu = Menu.SubMenu;
 
@@ -38,9 +38,12 @@ export default class AppLayoutMenu extends React.Component {
 
             <Menu.Item key="5">
               <Link to="/notifications">
-              <Icon type="notification" theme="outlined" />
-              <span>Értesítések</span>
-            </Link>
+                <Icon type="notification" theme="outlined" />
+                <span>
+                  Értesítések
+                </span>
+                <Badge status="processing" offset={[10,-3]}/>
+              </Link>
             </Menu.Item>
 
             <Menu.Item key="6">

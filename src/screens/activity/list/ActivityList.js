@@ -2,9 +2,8 @@ import React from 'react'
 import { Button } from 'antd';
 import { Link } from 'react-router-dom'
 
-import { ActivityService } from '../../api';
-import { LoadingBar } from '../../layout';
-import ActivityThumbnail from './ActivityThumbnail';
+import { ActivityService } from '../../../api';
+import { LoadingBar } from '../../../layout';
 import ActivityTable from './ActivityTable';
 
 export default class ActivityList extends React.Component {
@@ -30,7 +29,7 @@ export default class ActivityList extends React.Component {
     } else {
 
       // TODO: empty text msg
-      content = <ActivityTable data={this.state.activities}/>;
+      content = <ActivityTable data={this.state.activities} history={this.props.history}/>;
     }
     return content;
   }

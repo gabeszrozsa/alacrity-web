@@ -1,18 +1,29 @@
 import React from 'react';
-import moment from 'moment';
-import { Table, Divider, Tag } from 'antd';
+import { Table } from 'antd';
+
+import { formatDistance, formatDuration, formatDate } from '../utils';
 
 const { Column } = Table;
 
 export default class ActivityTable extends React.Component {
+  openActivityDetails = (id) => {
+    this.props.history.push(`/activity/${id}`);
+  }
+
   render() {
     return (
-      <Table dataSource={this.props.data} rowKey={record => record._id}>
+      <Table
+        dataSource={this.props.data}
+        rowKey={record => record._id}
+        onRow={record => ({
+            onClick: () => this.openActivityDetails(record._id)
+          })
+        }>
         <Column
           title="Időpont"
           dataIndex="date"
           key="date"
-          render={date => moment(date).format('YYYY-MM-DD')}
+          render={date => formatDate(date)}
         />
         <Column
           title="Sportág"
@@ -27,14 +38,16 @@ export default class ActivityTable extends React.Component {
           render={evt => evt.name}
         />
         <Column
-          title="Időtartam (másodperc)"
+          title="Időtartam"
           dataIndex="durationInSeconds"
           key="durationInSeconds"
+          render={durationInSeconds => formatDuration(durationInSeconds)}
         />
         <Column
-          title="Távolság (méter)"
+          title="Távolság"
           dataIndex="distanceInMeters"
           key="distanceInMeters"
+          render={distanceInMeters => formatDistance(distanceInMeters)}
         />
       </Table>
     )

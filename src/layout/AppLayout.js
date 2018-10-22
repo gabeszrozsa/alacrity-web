@@ -86,7 +86,7 @@ export default class AppLayout extends React.Component {
           </Content>
 
           <Footer style={{ textAlign: 'center' }}>
-            Astro ©2018 Created by Gabesz
+            Alacrity ©2018 Created by Gabesz
           </Footer>
 
         </Layout>

@@ -32,6 +32,18 @@ class ActivityService {
     .then(res => res)
     .catch(error => console.error('ActivityService -> updateActivity:', error));
   }
+
+  getComments(id) {
+    return Http.get(`${BASE_URL}/${id}/comment`)
+    .then(res => res)
+    .catch(error => console.error('ActivityService -> getComments:', error));
+  }
+
+  deleteComment(id, commentId) {
+    return Http.delete(`${BASE_URL}/${id}/comment/${commentId}`)
+    .then(res => res)
+    .catch(error => console.error('ActivityService -> deleteComment:', error));
+  }
 }
 
 const instance = new ActivityService();

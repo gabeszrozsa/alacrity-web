@@ -53,3 +53,11 @@ div.loading > div.ant-spin {
 .ant-table-thead > tr, .ant-table-tbody > tr {
   background-color: white;
 }
+
+tr.ant-table-row:hover {
+    cursor: pointer;
+}
+
+.ant-list-vertical .ant-list-item-meta-avatar {
+  display: block;
+}
