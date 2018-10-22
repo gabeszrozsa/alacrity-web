@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { ActivityService } from '../../api';
 import { LoadingBar } from '../../layout';
 import ActivityThumbnail from './ActivityThumbnail';
+import ActivityTable from './ActivityTable';
 
 export default class ActivityList extends React.Component {
   constructor() {
@@ -29,9 +30,7 @@ export default class ActivityList extends React.Component {
     } else {
 
       // TODO: empty text msg
-      content = this.state.activities.map(activity =>
-        (<ActivityThumbnail key={activity._id} activity={activity}/>)
-      );
+      content = <ActivityTable data={this.state.activities}/>;
     }
     return content;
   }

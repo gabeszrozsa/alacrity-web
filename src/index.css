@@ -47,3 +47,9 @@ div.loading > div.ant-spin {
   margin-right: 30px;
   margin-left: 10px;
 }
+
+
+/* ANT DESIGN OVERRIDE / EXTENSION */
+.ant-table-thead > tr, .ant-table-tbody > tr {
+  background-color: white;
+}
