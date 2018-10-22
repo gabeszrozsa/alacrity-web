@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import moment from 'moment';
 import { Divider, Icon, message } from 'antd';
 
 import { LoadingBar } from '../../layout';
-import { ActivityService } from '../../api';
+import { ActivityService, ActivityTypeService, LocationService } from '../../api';
 import ActivityForm from './ActivityForm';
 
 export default class EditActivity extends React.Component {
@@ -10,20 +11,47 @@ export default class EditActivity extends React.Component {
     super();
     this.state = {
       isFetching: true,
-      activity: null
+      activity: null,
+      locations: [],
+      activityTypes: []
     };
   }
 
-  componentDidMount() {
+  fetchActivity = () => {
     const id = this.props.match.params.id;
     ActivityService.getActivity(id).then(activity => {
         this.setState({
-          isFetching: false,
           activity: activity
         });
 
-        this.props.form.setFieldsValue({ name: activity.name })
+        this.props.form.setFieldsValue({
+          date: moment(activity.date),
+          location_id: activity.location._id,
+          activityType_id: activity.activityType._id,
+          distanceInMeters: activity.distanceInMeters,
+          durationInSeconds: activity.durationInSeconds,
+        })
     });
+  }
+
+  fetchLocations = () => {
+    LocationService.getAllLocations().then(locations => {
+      this.setState({ locations: locations });
+    });
+  }
+
+  fetchActivityTypes = () => {
+    ActivityTypeService.getAllActivityTypes().then(activityTypes => {
+      this.setState({ activityTypes: activityTypes });
+    });
+  }
+
+  componentDidMount() {
+    Promise.all([
+      this.fetchActivity(),
+      this.fetchActivityTypes(),
+      this.fetchLocations()
+    ]).then(res => this.setState({ isFetching: false }))
   }
 
   handleSubmit = (e) => {
@@ -56,6 +84,8 @@ export default class EditActivity extends React.Component {
             form={this.props.form}
             handleSubmit={this.handleSubmit}
             buttonText={'Mentés'}
+            activityTypes={this.state.activityTypes}
+            locations={this.state.locations}
           />
 
         </React.Fragment>
