@@ -10,6 +10,10 @@ class AuthService {
     return this.user !== null;
   }
 
+  currentUser() {
+    return this.user;
+  }
+
   loginWithCredentials(email, password) {
     return Http.post('http://localhost:3000/api/users/login', {
       email: email,

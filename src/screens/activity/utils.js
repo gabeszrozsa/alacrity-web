@@ -11,3 +11,7 @@ export function formatDistance(distance) {
 export function formatDate(date) {
   return moment(date).format('YYYY-MM-DD')
 }
+
+export function formatFullDate(date) {
+  return moment(date).format('YYYY-MM-DD hh:mm:ss')
+}

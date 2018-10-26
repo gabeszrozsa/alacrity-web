@@ -3,11 +3,15 @@ import { Icon, Tabs, Button, Popconfirm } from 'antd';
 import { Link } from 'react-router-dom'
 
 import ActivityDetailsComments from './ActivityDetailsComments';
+import ActivityDetailsLikes from './ActivityDetailsLikes';
 
 const TabPane = Tabs.TabPane;
 const ActivityDetailsFooter = (props) => {
   return (
     <React.Fragment>
+      <Button className='add-button' ghost={!props.isLiked} type="primary" icon="like" onClick={() => props.onLike()}>
+        Tetszik
+      </Button>
       <Link to={"/activity/edit/" + props.activity._id}>
         <Button className='add-button' ghost type="primary" icon="edit">
           Szerkesztés
@@ -17,14 +21,14 @@ const ActivityDetailsFooter = (props) => {
         <Button className='add-button' ghost type="danger" icon="delete">
           Törlés
         </Button>
-      </Popconfirm>,
+      </Popconfirm>
 
       <Tabs defaultActiveKey="1">
         <TabPane tab={<span><Icon type="message"/>Hozzászólások ({props.activity.comments.length})</span>} key="1">
           <ActivityDetailsComments {...props}/>
         </TabPane>
-        <TabPane tab={<span><Icon type="like"/>Kedvelések ({props.activity.likes.length})</span>} key="2">
-
+        <TabPane tab={<span><Icon type="like"/>Kedvelések ({props.likes.length})</span>} key="2">
+          <ActivityDetailsLikes {...props}/>
         </TabPane>
       </Tabs>
   </React.Fragment>

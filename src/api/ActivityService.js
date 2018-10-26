@@ -44,6 +44,30 @@ class ActivityService {
     .then(res => res)
     .catch(error => console.error('ActivityService -> deleteComment:', error));
   }
+
+  addNewComment(id, data) {
+    return Http.post(`${BASE_URL}/${id}/comment`, data)
+    .then(res => res)
+    .catch(error => console.error('ActivityService -> addNewComment:', error));
+  }
+
+  getLikes(id) {
+    return Http.get(`${BASE_URL}/${id}/like`)
+    .then(res => res)
+    .catch(error => console.error('ActivityService -> getLikes:', error));
+  }
+
+  deleteLike(id, likeId) {
+    return Http.delete(`${BASE_URL}/${id}/like/${likeId}`)
+    .then(res => res)
+    .catch(error => console.error('ActivityService -> deleteLike:', error));
+  }
+
+  addLike(id) {
+    return Http.post(`${BASE_URL}/${id}/like`, {})
+    .then(res => res)
+    .catch(error => console.error('ActivityService -> addLike:', error));
+  }
 }
 
 const instance = new ActivityService();
