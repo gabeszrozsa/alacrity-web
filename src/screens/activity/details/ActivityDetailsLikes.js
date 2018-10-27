@@ -1,6 +1,6 @@
 import React from 'react'
 import { Avatar, Card } from 'antd';
-import { formatFullDate } from '../utils';
+import { formatFullDate } from '../../../utils';
 
 const { Meta } = Card;
 

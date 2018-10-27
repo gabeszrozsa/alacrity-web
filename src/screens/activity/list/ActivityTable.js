@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'antd';
 
-import { formatDistance, formatDuration, formatDate } from '../utils';
+import { formatDistance, formatDuration, formatDate } from '../../../utils';
 
 const { Column } = Table;
 

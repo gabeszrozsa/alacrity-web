@@ -38,6 +38,18 @@ class EventService {
     .then(res => res)
     .catch(error => console.error('EventService -> inviteUsers:', error));
   }
+
+  getAttendees(id) {
+    return Http.get(`${BASE_URL}/${id}/attendees`)
+    .then(res => res)
+    .catch(error => console.error('EventService -> getAttendees:', error));
+  }
+
+  cancelEvent(id, data) {
+    return Http.post(`${BASE_URL}/${id}/cancel`, data)
+    .then(res => res)
+    .catch(error => console.error('EventService -> inviteUsers:', error));
+  }
 }
 
 const instance = new EventService();

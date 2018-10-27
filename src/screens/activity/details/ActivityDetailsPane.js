@@ -2,7 +2,7 @@ import React from 'react';
 import { List, Avatar, Icon } from 'antd';
 
 import ActivityDetailsFooter from './ActivityDetailsFooter';
-import { formatDistance, formatDuration, formatDate } from '../utils';
+import { formatDistance, formatDuration, formatDate } from '../../../utils';
 import running from './icon_running.png';
 
 const ActivityDetailsPane = (props) => {

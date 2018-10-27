@@ -3,6 +3,7 @@ import NewsFeed from './news/NewsFeed';
 import EventList from './events/EventList';
 import AddEvent from './events/AddEvent';
 import EditEvent from './events/EditEvent';
+import EventDetailsContainer from './events/details/EventDetailsContainer';
 
 import Locations from './locations/';
 
@@ -18,6 +19,7 @@ export {
   EventList,
   AddEvent,
   EditEvent,
+  EventDetailsContainer,
   Locations,
   ActivityTypes,
   Activities,

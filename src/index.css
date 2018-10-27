@@ -61,3 +61,7 @@ tr.ant-table-row:hover {
 .ant-list-vertical .ant-list-item-meta-avatar {
   display: block;
 }
+
+.ant-avatar {
+  border-radius: unset;
+}

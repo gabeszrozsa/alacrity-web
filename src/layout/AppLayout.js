@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 
 import { AppLayoutMenu, AppLayoutHeader, PrivateRoute } from './';
 import { NewsFeed,
-  EventList, AddEvent, EditEvent,
+  EventList, AddEvent, EditEvent, EventDetailsContainer,
   Locations,
   Activities, ActivityTypes, Auth } from '../screens';
 
@@ -63,7 +63,7 @@ export default class AppLayout extends React.Component {
               <PrivateRoute exact path="/events" component={EventList} />
               <PrivateRoute exact path="/events/add" component={AddEventForm} />
               <PrivateRoute exact path="/events/edit/:id" component={EditEventForm} />
-              <PrivateRoute exact path="/events/:id" component={EventList} />
+              <PrivateRoute exact path="/events/:id" component={EventDetailsContainer} />
 
               <PrivateRoute exact path="/locations" component={Locations.List} />
               <PrivateRoute exact path="/locations/add" component={AddLocationForm} />
