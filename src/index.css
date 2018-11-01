@@ -65,3 +65,9 @@ tr.ant-table-row:hover {
 .ant-avatar {
   border-radius: unset;
 }
+
+/* GOOGLE MAPS CONTAINER */
+.map {
+    width: 600px !important;
+    height: 600px !important;
+}

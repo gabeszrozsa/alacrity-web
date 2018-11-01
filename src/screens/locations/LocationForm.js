@@ -39,13 +39,6 @@ const LocationForm = (props) => {
         )}
       </FormItem>
 
-      <FormItem {...formItemLayout} label={'Koordináták'}>
-        {getFieldDecorator('coordinates', {
-          rules: [{ message: 'Please input your Koordináták!', whitespace: true }],
-        })(
-          <Input/>
-        )}
-      </FormItem>
 
       <FormItem {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">{props.buttonText}</Button>
