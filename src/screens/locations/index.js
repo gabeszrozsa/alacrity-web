@@ -1,11 +1,11 @@
 import LocationList from './LocationList';
 import AddLocationContainer from './add/AddLocationContainer';
 import EditLocation from './EditLocation';
-import LocationDetails from './LocationDetails';
+import LocationDetailsContainer from './details/LocationDetailsContainer';
 
 const locations = {
   List: LocationList,
-  Details: LocationDetails,
+  Details: LocationDetailsContainer,
   Add: AddLocationContainer,
   Edit: EditLocation,
 }

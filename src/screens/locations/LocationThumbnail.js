@@ -17,7 +17,6 @@ const LocationThumbnail = (props) => {
     >
       <Meta
         title={props.loc.name}
-        description={props.loc.coordinates}
       />
     </Card>
   )

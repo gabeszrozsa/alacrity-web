@@ -2,6 +2,7 @@ import React from 'react';
 import { List, Avatar, Icon } from 'antd';
 
 import ActivityDetailsFooter from './ActivityDetailsFooter';
+import LocationMap from '../../../components/LocationMap';
 import { formatDistance, formatDuration, formatDate } from '../../../utils';
 import running from './icon_running.png';
 
@@ -26,7 +27,9 @@ const ActivityDetailsPane = (props) => {
             <IconText type="rise" text={formatDistance(item.distanceInMeters)} />,
             <IconText type="dashboard" text={formatDuration(item.durationInSeconds)} />
           ]}
-          extra={<img width={272} alt="logo" src="http://ntmresizer.azureedge.net/sized/358/284/media.iceportal.com/27286/photos/4760351_XL.jpg" />}
+          extra={
+            <LocationMap loc={item.location} height={'200px'}/>
+          }
         >
           <List.Item.Meta
             avatar={<Avatar src={running} />}

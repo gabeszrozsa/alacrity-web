@@ -16,9 +16,20 @@ export default class AddLocationContainer extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const { center, zoom, routeCoords } = this.state;
+
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        LocationService.addNewLocation(values).then(id => {
+        const newLocation = {
+          name: values.name,
+          coordinates: {
+            center,
+            routeCoords,
+            zoom
+          }
+        };
+
+        LocationService.addNewLocation(newLocation).then(id => {
           const redirectUrl = `/locations/${id}`;
           message.info('Helyszín hozzáadva!');
           this.props.history.push(redirectUrl);

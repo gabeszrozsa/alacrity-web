@@ -1,8 +1,9 @@
 import React from 'react'
 
-import { LocationService } from '../../api';
-import { LoadingBar } from '../../layout';
-import LocationThumbnail from './LocationThumbnail';
+import { LocationService } from '../../../api';
+import { LoadingBar } from '../../../layout';
+import LocationThumbnail from '../LocationThumbnail';
+import LocationMap from '../../../components/LocationMap';
 
 export default class LocationDetails extends React.Component {
   constructor() {
@@ -27,7 +28,12 @@ export default class LocationDetails extends React.Component {
       content = (<LoadingBar text="Fetching location..."/>);
     } else {
       // TODO: empty text msg
-      content = (<LocationThumbnail loc={this.state.loc}/>);
+      content = (
+        <React.Fragment>
+          <LocationThumbnail loc={this.state.loc}/>
+          <LocationMap loc={this.state.loc}/>
+        </React.Fragment>
+      );
     }
     return content;
   }
