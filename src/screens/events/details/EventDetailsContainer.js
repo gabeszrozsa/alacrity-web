@@ -1,13 +1,14 @@
 import React from 'react'
-import { message, Tabs, Icon } from 'antd';
+import { message, Icon, Row, Col, Divider } from 'antd';
 
 import { EventService, AuthService } from '../../../api';
 import { LoadingBar } from '../../../layout';
 import EventDetailsPane from './EventDetailsPane';
 import EventDetailsFooter from './EventDetailsFooter';
 import EventDetailsAttendees from './EventDetailsAttendees';
+import EventInviteUsers from './EventInviteUsers';
 
-const TabPane = Tabs.TabPane;
+import './event-details.css'
 
 export default class EventDetailsContainer extends React.Component {
   constructor() {
@@ -16,13 +17,15 @@ export default class EventDetailsContainer extends React.Component {
       isFetching: true,
       isAttending: false,
       evt: null,
-      attendees: []
+      attendees: [],
+      users: []
     }
   }
 
   componentDidMount() {
     this.fetchEvent();
     this.fetchAttendees();
+    this.fetchUsers();
   }
 
   fetchEvent = () => {
@@ -36,16 +39,16 @@ export default class EventDetailsContainer extends React.Component {
     EventService.getAttendees(id).then(attendees => this.updateStateWithAttendees(attendees));
   }
 
+  fetchUsers = () => {
+    AuthService.getAll().then(users => this.setState({ users }));
+  }
+
   updateStateWithAttendees = (attendees) => {
     const currentUser = AuthService.currentUser()._id;
     const isAttending = attendees.find(attendee => currentUser === attendee._id);
 
     this.setState({ attendees, isAttending });
   }
-
-//   handleUpdateActivity = (activity) => {
-//     this.setState({ activity });
-//   }
 
   handleDeleteEvent = () => {
     EventService.deleteEvent(this.state.evt._id)
@@ -55,51 +58,70 @@ export default class EventDetailsContainer extends React.Component {
       })
   }
 
-  handleAttend = () => {
+  handleCancel = (user) => {
     const id = this.props.match.params.id;
+    EventService.cancelEvent(id, { attendee: user})
+      .then(attendees => this.updateStateWithAttendees(attendees))
+  }
+
+  handleInvite = (users) => {
+    const id = this.props.match.params.id;
+    EventService.inviteUsers(id, { attendees: users })
+      .then(attendees => this.updateStateWithAttendees(attendees))
+  }
+
+  handleAttend = () => {
     const currentUser = AuthService.currentUser()._id;
 
     if (this.state.isAttending) {
-      const data = { attendee: currentUser };
-      EventService.cancelEvent(id, data)
-        .then(attendees => this.updateStateWithAttendees(attendees))
+      this.handleCancel(currentUser);
     } else {
-      const data = { attendees: [currentUser] };
-      EventService.inviteUsers(id, data)
-        .then(attendees => this.updateStateWithAttendees(attendees))
+      this.handleInvite([currentUser]);
     }
   }
 
   renderEvent() {
-    const { isFetching, isAttending, evt, attendees } = this.state;
+    const { isFetching, isAttending, evt, attendees, users } = this.state;
 
     let content;
     if (isFetching) {
       content = (<LoadingBar text="Esemény betöltése..."/>);
     } else {
 
-      // TODO: empty text msg
+      const invitedUsers = (attendees.length > 0) ? attendees.map(a => a._id) : [];
+      const notInvitedUsers = (users.length > 0) ? users.filter(u => !invitedUsers.includes(u._id)) : [];
+
       content = (
-          <React.Fragment>
+        <Row>
+          <Col span={12}>
             <EventDetailsPane
                 evt={evt}
                 onDeleteEvent={this.handleDeleteEvent}
                 onAttend={this.handleAttend}
                 />
 
-            <EventDetailsFooter 
-              onAttend={this.handleAttend} 
-              onDeleteEvent={this.handleDeleteEvent} 
+            <EventDetailsFooter
+              onAttend={this.handleAttend}
+              onDeleteEvent={this.handleDeleteEvent}
               evt={evt}
               isAttending={isAttending}
               />
+          </Col>
+          <Col span={12}>
+            <EventInviteUsers
+              users={notInvitedUsers}
+              onInviteUsers={this.handleInvite}
+            />
 
-            <Tabs defaultActiveKey="1">
-                <TabPane tab={<span><Icon type="team"/>Résztvevők ({attendees.length})</span>} key="1">
-                    <EventDetailsAttendees attendees={attendees}/>
-                </TabPane>
-            </Tabs>
-          </React.Fragment>
+            <Divider>
+              <Icon type="team"/>Résztvevők ({attendees.length})
+            </Divider>
+            <EventDetailsAttendees
+              attendees={attendees}
+              onCancel={this.handleCancel}
+            />
+          </Col>
+        </Row>
         )
     }
     return content;

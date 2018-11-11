@@ -22,10 +22,8 @@ class AuthService {
     .then(user => {
       this.user = user;
 
-      const tokenLength = user.tokens.length;
-      const lastToken = user.tokens[tokenLength - 1];
-      Http.setAuthToken(lastToken.token);
-      LocalStorageService.storeToken(lastToken.token);
+      Http.setAuthToken(user.token);
+      LocalStorageService.storeToken(user.token);
 
       Promise.resolve();
     })
@@ -37,7 +35,13 @@ class AuthService {
     .then(res => {
       this.user = res;
     })
-    .catch(error => console.error('AuthService -> loginWithCredentials:', error));
+    .catch(error => console.error('AuthService -> getCurrent:', error));
+  }
+
+  getAll() {
+    return Http.get('http://localhost:3000/api/users/all')
+    .then(res => res)
+    .catch(error => console.error('AuthService -> getAll:', error));
   }
 
   preAuthenticate() {

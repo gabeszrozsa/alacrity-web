@@ -65,6 +65,10 @@ tr.ant-table-row:hover {
 .ant-avatar {
   border-radius: unset;
 }
+.ant-divider-inner-text > .anticon {
+  margin-right: 5px;
+  margin-left: -10px;
+}
 
 /* GOOGLE MAPS CONTAINER */
 .map {
