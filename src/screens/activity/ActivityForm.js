@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form, InputNumber, Button, Select, DatePicker } from 'antd';
+import datePickerLocale from './../../utils/datePickerLocale';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -74,7 +75,7 @@ const ActivityForm = (props) => {
         {getFieldDecorator('date', {
           rules: [{ type: 'object', required: true, message: 'Kérlek adj meg egy időpontot!' }]
         })(
-          <DatePicker placeholder="Válassz időpontot!" showTime format="YYYY-MM-DD HH:mm:ss" />
+          <DatePicker locale={datePickerLocale} placeholder="Válassz időpontot!" showTime format="YYYY-MM-DD HH:mm:ss" />
         )}
       </FormItem>
 
