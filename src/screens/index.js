@@ -13,6 +13,7 @@ import Activities from './activity/';
 
 import Auth from './auth/Auth';
 import Login from './auth/Login';
+import Messages from './messages/MessagesContainer.js'
 
 export {
   NewsFeed,
@@ -24,5 +25,6 @@ export {
   ActivityTypes,
   Activities,
   Auth,
-  Login
+  Login,
+  Messages
 };

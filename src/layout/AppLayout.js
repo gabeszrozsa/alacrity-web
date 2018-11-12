@@ -1,32 +1,45 @@
-import React from 'react';
-import { Layout, Form } from 'antd';
+import React, { Component } from 'react';
+import { Form } from 'antd';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
-import { AppLayoutMenu, AppLayoutHeader, PrivateRoute } from './';
-import { NewsFeed,
+import DashboardLayout from './dashboard/DashboardLayout';
+// import AuthLayout from './auth/AuthLayout';
+import AuthService from './../api/AuthService';
+
+import { NewsFeed, Messages,
   EventList, AddEvent, EditEvent, EventDetailsContainer,
   Locations,
   Activities, ActivityTypes, Auth } from '../screens';
 
-
-import AuthService from '../api/AuthService'
-
-
-const { Content, Footer, Sider } = Layout;
-
-export default class AppLayout extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      collapsed: false,
-    };
-  }
+const AuthLayout = ({children, ...rest}) => {
+  return (
+    <div className="page page-login">
+      <div className="main">{children}</div>
+    </div>
+  )
+}
 
 
-  onCollapse = (collapsed) => {
-    this.setState({ collapsed });
-  }
+const DashboardRoute = ({component: Component, ...rest}) => {
+  return (
+    <Route {...rest} render={matchProps => (
+      <DashboardLayout>
+          <Component {...matchProps} />
+      </DashboardLayout>
+    )} />
+  )
+};
 
+const AuthRoute = ({component: Component, ...rest}) => {
+  return (
+    <Route {...rest} render={matchProps => (
+      <AuthLayout>
+          <Component {...matchProps} />
+      </AuthLayout>
+    )} />
+  )
+};
+export default class AppLayout extends Component {
   render() {
     const AddActivityTypeForm = Form.create()(ActivityTypes.Add);
     const EditActivityTypeForm = Form.create()(ActivityTypes.Edit);
@@ -41,57 +54,42 @@ export default class AppLayout extends React.Component {
     const EditLocationForm = Form.create()(Locations.Edit);
 
     const isLoggedIn = AuthService.isLoggedIn();
+    const RedirectTo = (isLoggedIn) ? <Redirect to="/news" /> : <Redirect to="/login" />
 
     return (
       <Router>
+        <Switch>
+          <Route exact path="/">
+            { RedirectTo }
+          </Route>
 
-      <Layout style={{ minHeight: '100vh' }}>
+          <AuthRoute exact path="/login" component={Auth}/>
 
-        <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
-          <div className="logo" />
-          <AppLayoutMenu/>
-        </Sider>
+          <DashboardRoute exact path="/events" component={EventList} />
+          <DashboardRoute exact path="/events/add" component={AddEventForm} />
+          <DashboardRoute exact path="/events/edit/:id" component={EditEventForm} />
+          <DashboardRoute exact path="/events/:id" component={EventDetailsContainer} />
 
-        <Layout>
-          <AppLayoutHeader/>
-          <Content style={{ margin: '0 16px', paddingTop: '20px' }}>
+          <DashboardRoute exact path="/locations" component={Locations.List} />
+          <DashboardRoute exact path="/locations/add" component={AddLocationForm} />
+          <DashboardRoute exact path="/locations/edit/:id" component={EditLocationForm} />
+          <DashboardRoute exact path="/locations/:id" component={Locations.Details} />
 
-            <Switch>
-              <Route path="/login"  render={() => (
-                isLoggedIn ? (<Redirect to="/"/>) : (<Auth/>)
-              )} />
-              <PrivateRoute exact path="/events" component={EventList} />
-              <PrivateRoute exact path="/events/add" component={AddEventForm} />
-              <PrivateRoute exact path="/events/edit/:id" component={EditEventForm} />
-              <PrivateRoute exact path="/events/:id" component={EventDetailsContainer} />
+          <DashboardRoute exact path="/activity" component={Activities.List} />
+          <DashboardRoute exact path="/activity/add" component={AddActivityForm} />
+          <DashboardRoute exact path="/activity/edit/:id" component={EditActivityForm} />
+          <DashboardRoute exact path="/activity/:id" component={Activities.Details} />
 
-              <PrivateRoute exact path="/locations" component={Locations.List} />
-              <PrivateRoute exact path="/locations/add" component={AddLocationForm} />
-              <PrivateRoute exact path="/locations/edit/:id" component={EditLocationForm} />
-              <PrivateRoute exact path="/locations/:id" component={Locations.Details} />
+          <DashboardRoute exact path="/activity-types" component={ActivityTypes.List} />
+          <DashboardRoute exact path="/activity-types/add" component={AddActivityTypeForm} />
+          <DashboardRoute exact path="/activity-types/edit/:id" component={EditActivityTypeForm} />
+          <DashboardRoute exact path="/activity-types/:id" component={ActivityTypes.Details} />
 
-              <PrivateRoute exact path="/activity" component={Activities.List} />
-              <PrivateRoute exact path="/activity/add" component={AddActivityForm} />
-              <PrivateRoute exact path="/activity/edit/:id" component={EditActivityForm} />
-              <PrivateRoute exact path="/activity/:id" component={Activities.Details} />
-
-              <PrivateRoute exact path="/activity-types" component={ActivityTypes.List} />
-              <PrivateRoute exact path="/activity-types/add" component={AddActivityTypeForm} />
-              <PrivateRoute exact path="/activity-types/edit/:id" component={EditActivityTypeForm} />
-              <PrivateRoute exact path="/activity-types/:id" component={ActivityTypes.Details} />
-
-              <PrivateRoute exact path="/" component={NewsFeed} />
-            </Switch>
-
-          </Content>
-
-          <Footer style={{ textAlign: 'center' }}>
-            Alacrity ©2018 Created by Gabesz
-          </Footer>
-
-        </Layout>
-      </Layout>
+          <DashboardRoute exact path="/news" component={NewsFeed} />
+          <DashboardRoute exact path="/messages" component={Messages} />
+        </Switch>
       </Router>
     );
   }
+
 }

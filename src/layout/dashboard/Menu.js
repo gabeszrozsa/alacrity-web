@@ -1,15 +1,26 @@
 import React from 'react';
-import { Menu, Icon, Badge } from 'antd';
+import { Menu, Icon } from 'antd';
 import { Link } from 'react-router-dom'
-// const SubMenu = Menu.SubMenu;
+
+const ROUTE_KEY_MAP = {
+  'news': ['1'],
+  'activity': ['2'],
+  'activity-types': ['3'],
+  'events': ['4'],
+  'messages': ['5'],
+  'locations': ['6'],
+}
 
 export default class AppLayoutMenu extends React.Component {
   render () {
+    const route = this.props.path.split('/')[1];
+    const selectedKeys = ROUTE_KEY_MAP[route];
+
     return (
-        <Menu theme="dark" defaultSelectedKeys={['2']} mode="inline">
+        <Menu theme="dark" selectedKeys={selectedKeys} mode="inline">
 
             <Menu.Item key="1">
-              <Link to="/">
+              <Link to="/news">
               <Icon type="solution" />
               <span>Hírfolyam</span>
             </Link>
@@ -37,12 +48,12 @@ export default class AppLayoutMenu extends React.Component {
             </Menu.Item>
 
             <Menu.Item key="5">
-              <Link to="/notifications">
-                <Icon type="notification" theme="outlined" />
+              <Link to="/messages">
+                <Icon type="inbox" theme="outlined" />
                 <span>
-                  Értesítések
+                  Üzenetek
                 </span>
-                <Badge status="processing" offset={[10,-3]}/>
+                {/* <Badge status="processing" offset={[10,-3]}/> */}
               </Link>
             </Menu.Item>
 

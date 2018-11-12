@@ -1,6 +1,6 @@
 import React from 'react'
 import { Layout } from 'antd';
-import prof from './prag_prof.jpg';
+import prof from '../prag_prof.jpg';
 
 const { Header } = Layout;
 

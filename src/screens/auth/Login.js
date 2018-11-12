@@ -13,6 +13,7 @@ export default class Login extends React.Component {
       if (!err) {
         Auth.loginWithCredentials(values.email, values.password)
         .then(() => {
+          console.log('ok');
           return (<Redirect to={{ pathname: '/' }} />);
         })
       }
