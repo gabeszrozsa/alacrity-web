@@ -7,6 +7,7 @@ import EventDetailsPane from './EventDetailsPane';
 import EventDetailsFooter from './EventDetailsFooter';
 import EventDetailsAttendees from './EventDetailsAttendees';
 import EventInviteUsers from './EventInviteUsers';
+import LocationMap from './../../../components/LocationMap';
 
 import './event-details.css'
 
@@ -94,6 +95,8 @@ export default class EventDetailsContainer extends React.Component {
       content = (
         <Row>
           <Col span={12}>
+            <LocationMap loc={evt.location} width={'400px'} polyline={false}/>
+            
             <EventDetailsPane
                 evt={evt}
                 onDeleteEvent={this.handleDeleteEvent}
