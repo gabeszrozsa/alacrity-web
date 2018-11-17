@@ -8,6 +8,7 @@ class LocationDetailsMap extends React.Component {
     const width = this.props.width || '300px';
     const polyline = typeof this.props.polyline !== 'undefined' ? this.props.polyline : true;
     const marker = typeof this.props.marker !== 'undefined' ? this.props.marker : true;
+    const zoomOffset = typeof this.props.zoomOffset !== 'undefined' ? this.props.zoomOffset : 0;
 
     return(
         <Map google={this.props.google}
@@ -17,7 +18,7 @@ class LocationDetailsMap extends React.Component {
               position: 'relative',
               width: width
             }}
-            zoom={this.props.loc.coordinates.zoom}
+            zoom={this.props.loc.coordinates.zoom + zoomOffset}
             initialCenter={this.props.loc.coordinates.center}>
 
             { marker && <Marker

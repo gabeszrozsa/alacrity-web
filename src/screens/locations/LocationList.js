@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from 'antd';
+import { Row, Col, Button } from 'antd';
 import { Link } from 'react-router-dom'
 
 import { LocationService } from '../../api';
@@ -43,14 +43,21 @@ export default class LocationList extends React.Component {
 
     return (
       <React.Fragment>
-        <Link to="/locations/add">
-          <Button className='add-button' type="primary" icon="pushpin" size='large'>
-            Helyszín hozzáadása
-          </Button>
-        </Link>
-
-        { Locations }
-
+        <Row>
+          <Col span={24}>
+            <Link to="/locations/add">
+              <Button className='add-button' type="primary" icon="pushpin" size='large'>
+                Helyszín hozzáadása
+              </Button>
+            </Link>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={24}>
+            { Locations }
+            { Locations }
+          </Col>
+        </Row>
       </React.Fragment>
     )
   }

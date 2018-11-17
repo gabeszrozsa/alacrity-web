@@ -2,17 +2,25 @@ import React from 'react';
 import { Card, Icon } from 'antd';
 import { Link } from 'react-router-dom'
 
+import LocationMap from './../../components/LocationMap';
+import './location-thumbnail.css';
+
 const { Meta } = Card;
 
 // TODO: placeholder IMG
 const LocationThumbnail = (props) => {
   return (
-    <Card style={{ width: 240 }}
-      cover={<img alt="example" src="http://ntmresizer.azureedge.net/sized/358/284/media.iceportal.com/27286/photos/4760351_XL.jpg" />}
+    <Card className="location-thumbnail"
+      cover={
+        <LocationMap
+          zoomOffset={-1}
+          loc={props.loc}
+          height={'200px'}
+        />
+      }
       actions={[
-        <Link to={'/locations/' + props.loc._id}><Icon type="eye" /></Link>,
-        <Link to={'/locations/edit/' + props.loc._id}><Icon type="edit" /></Link>,
-        <Icon type="delete" />
+        <Link to={'/locations/' + props.loc._id}><Icon type="profile" /> Részletek</Link>,
+        <Link to={'/locations/edit/' + props.loc._id}><Icon type="edit" /> Szerkesztés</Link>
       ]}
     >
       <Meta
