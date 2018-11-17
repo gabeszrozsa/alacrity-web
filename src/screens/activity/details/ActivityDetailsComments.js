@@ -1,6 +1,8 @@
 import React from 'react'
 import { List, Avatar, message, Input, Button, Popconfirm, Icon } from 'antd';
+
 import { ActivityService } from '../../../api';
+import UserAvatar from './../../../components/UserAvatar';
 
 const { TextArea } = Input;
 
@@ -80,7 +82,7 @@ export default class ActivityDetailsComments extends React.Component {
             style={{display: 'flex'}}
             >
               <List.Item.Meta
-                avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                avatar={<UserAvatar displayName={item.createdBy.displayName} />}
                 title={<a href="https://ant.design">{item.createdBy.displayName}</a>}
                 description={item.text}
               />

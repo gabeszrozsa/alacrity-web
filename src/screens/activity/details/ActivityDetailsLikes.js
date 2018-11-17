@@ -1,6 +1,8 @@
 import React from 'react'
 import { Avatar, Card } from 'antd';
+
 import { formatFullDate } from '../../../utils';
+import UserAvatar from './../../../components/UserAvatar';
 
 const { Meta } = Card;
 
@@ -9,7 +11,7 @@ const ActivityDetailsLikes = (props) => {
     return (
       <Card key={like._id} style={{ width: 300, marginTop: 16 }}>
         <Meta
-          avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+          avatar={<UserAvatar displayName={like.createdBy.displayName} />}
           title={like.createdBy.displayName}
           description={formatFullDate(like.createdAt)}
         />

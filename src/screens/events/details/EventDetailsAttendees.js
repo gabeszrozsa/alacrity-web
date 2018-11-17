@@ -1,6 +1,8 @@
 import React from 'react'
 import { Avatar, Card, Icon, Popconfirm } from 'antd';
 
+import UserAvatar from './../../../components/UserAvatar';
+
 const { Meta } = Card;
 
 const CardText = ({ name, id, onCancel }) => (
@@ -21,7 +23,7 @@ const EventDetailsAttendees = (props) => {
     return (
       <Card className='attendee-card' key={attendee._id}>
         <Meta
-          avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+          avatar={<UserAvatar displayName={attendee.displayName} />}
           title={
             <CardText
               name={attendee.displayName}
