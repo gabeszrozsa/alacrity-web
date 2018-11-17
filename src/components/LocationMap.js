@@ -6,6 +6,9 @@ class LocationDetailsMap extends React.Component {
   render() {
     const height = this.props.height || '300px';
     const width = this.props.width || '300px';
+    const polyline = typeof this.props.polyline !== 'undefined' ? this.props.polyline : true;
+    const marker = typeof this.props.marker !== 'undefined' ? this.props.marker : true;
+
     return(
         <Map google={this.props.google}
             style={{width: '100%', height: '100%', position: 'relative'}}
@@ -14,19 +17,21 @@ class LocationDetailsMap extends React.Component {
               position: 'relative',
               width: width
             }}
-            zoom={13}
+            zoom={this.props.loc.coordinates.zoom}
             initialCenter={this.props.loc.coordinates.center}>
 
-            <Marker
+            { marker && <Marker
               key={this.props.loc._id}
               title={this.props.loc.name}
               position={this.props.loc.coordinates.center} />
+            }
 
-            <Polyline
+            { polyline && <Polyline
               path={this.props.loc.coordinates.routeCoords}
               strokeColor="red"
               strokeOpacity={0.8}
               strokeWeight={3} />
+            }
 
         </Map>
     )

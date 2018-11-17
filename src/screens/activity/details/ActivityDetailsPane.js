@@ -28,7 +28,7 @@ const ActivityDetailsPane = (props) => {
             <IconText type="dashboard" text={formatDuration(item.durationInSeconds)} />
           ]}
           extra={
-            <LocationMap loc={item.location} height={'200px'}/>
+            <LocationMap loc={item.location} width={'400px'} marker={false}/>
           }
         >
           <List.Item.Meta
