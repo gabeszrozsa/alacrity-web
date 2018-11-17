@@ -1,6 +1,6 @@
 import Http from '../services/HttpService';
 
-const BASE_URL = 'http://localhost:3000/api/activity-type';
+const BASE_URL = 'http://localhost:5000/api/activity-type';
 
 class ActivityTypeService {
   addNewActivityType(data) {

@@ -15,7 +15,7 @@ class AuthService {
   }
 
   loginWithCredentials(email, password) {
-    return Http.post('http://localhost:3000/api/users/login', {
+    return Http.post('http://localhost:5000/api/users/login', {
       email: email,
       password: password
     })
@@ -31,7 +31,7 @@ class AuthService {
   }
 
   getCurrent() {
-    return Http.get('http://localhost:3000/api/users/current')
+    return Http.get('http://localhost:5000/api/users/current')
     .then(res => {
       this.user = res;
     })
@@ -39,7 +39,7 @@ class AuthService {
   }
 
   getAll() {
-    return Http.get('http://localhost:3000/api/users/all')
+    return Http.get('http://localhost:5000/api/users/all')
     .then(res => res)
     .catch(error => console.error('AuthService -> getAll:', error));
   }

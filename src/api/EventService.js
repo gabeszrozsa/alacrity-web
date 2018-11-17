@@ -1,6 +1,6 @@
 import Http from '../services/HttpService';
 
-const BASE_URL = 'http://localhost:3000/api/event';
+const BASE_URL = 'http://localhost:5000/api/event';
 
 class EventService {
   addNewEvent(data) {
