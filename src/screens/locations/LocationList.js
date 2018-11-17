@@ -55,7 +55,6 @@ export default class LocationList extends React.Component {
         <Row>
           <Col span={24}>
             { Locations }
-            { Locations }
           </Col>
         </Row>
       </React.Fragment>
