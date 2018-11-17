@@ -27,7 +27,7 @@ const ActivityDetailsFooter = (props) => {
         <TabPane tab={<span><Icon type="message"/>Hozzászólások ({props.activity.comments.length})</span>} key="1">
           <ActivityDetailsComments {...props}/>
         </TabPane>
-        <TabPane tab={<span><Icon type="like"/>Kedvelések ({props.likes.length})</span>} key="2">
+        <TabPane tab={<span><Icon type="like"/>Kedvelések ({props.likes.length})</span>} disabled={props.likes.length === 0} key="2">
           <ActivityDetailsLikes {...props}/>
         </TabPane>
       </Tabs>

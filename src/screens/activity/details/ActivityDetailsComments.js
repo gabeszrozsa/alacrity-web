@@ -76,6 +76,7 @@ export default class ActivityDetailsComments extends React.Component {
       <List
         loading={isFetching}
         dataSource={comments}
+        locale={{ emptyText: 'Üres'}}
         renderItem={item => (
           <List.Item
             actions={[<DeleteComment id={item._id} onDeleteComment={this.deleteComment}/>]}
