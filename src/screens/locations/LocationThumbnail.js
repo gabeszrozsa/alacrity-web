@@ -19,8 +19,8 @@ const LocationThumbnail = (props) => {
         />
       }
       actions={[
-        <Link to={'/locations/' + props.loc._id}><Icon type="profile" /> Részletek</Link>,
-        <Link to={'/locations/edit/' + props.loc._id}><Icon type="edit" /> Szerkesztés</Link>
+        <Link to={'/locations/' + props.loc._id}><Icon type="eye" /> Részletek</Link>,
+        <Link to={'/locations/edit/' + props.loc._id}><Icon type="edit" /> Szerkesztés</Link>,
       ]}
     >
       <Meta
