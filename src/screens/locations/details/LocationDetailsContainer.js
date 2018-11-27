@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { LocationService } from '../../../api';
-import { LoadingBar } from '../../../layout';
+import { LoadingBar } from '../../../components';
 import LocationThumbnail from '../LocationThumbnail';
 import LocationMap from '../../../components/LocationMap';
 

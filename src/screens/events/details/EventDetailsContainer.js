@@ -2,12 +2,11 @@ import React from 'react'
 import { message, Icon, Row, Col, Divider } from 'antd';
 
 import { EventService, AuthService } from '../../../api';
-import { LoadingBar } from '../../../layout';
+import { LoadingBar, LocationMap } from '../../../components/';
 import EventDetailsPane from './EventDetailsPane';
 import EventDetailsFooter from './EventDetailsFooter';
 import EventDetailsAttendees from './EventDetailsAttendees';
 import EventInviteUsers from './EventInviteUsers';
-import LocationMap from './../../../components/LocationMap';
 
 import './event-details.css'
 
@@ -96,7 +95,7 @@ export default class EventDetailsContainer extends React.Component {
         <Row>
           <Col span={12}>
             <LocationMap loc={evt.location} width={'400px'} polyline={false}/>
-            
+
             <EventDetailsPane
                 evt={evt}
                 onDeleteEvent={this.handleDeleteEvent}

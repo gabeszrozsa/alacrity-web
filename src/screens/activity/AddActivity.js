@@ -1,7 +1,7 @@
 import React from 'react'
 import { Divider, Icon, message } from 'antd';
 import { ActivityService, ActivityTypeService, LocationService } from '../../api';
-import { LoadingBar } from '../../layout';
+import { LoadingBar } from '../../components';
 import ActivityForm from './ActivityForm';
 
 export default class AddActivity extends React.Component {

@@ -1,10 +1,10 @@
 import React from 'react'
-import { Divider, Icon, message } from 'antd';
+import { Divider, Icon, message, Form } from 'antd';
 import { EventService, LocationService } from '../../api';
-import { LoadingBar } from '../../layout';
+import { LoadingBar } from '../../components';
 import EventForm from './EventForm';
 
-export default class AddEvent extends React.Component {
+class AddEvent extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -61,3 +61,5 @@ export default class AddEvent extends React.Component {
     }
   }
 }
+const AddEventForm = Form.create()(AddEvent);
+export default AddEventForm;

@@ -18,7 +18,6 @@ export default class AppLayoutMenu extends React.Component {
 
     return (
         <Menu theme="dark" selectedKeys={selectedKeys} mode="inline">
-
             <Menu.Item key="1">
               <Link to="/news">
               <Icon type="solution" />
@@ -53,7 +52,6 @@ export default class AppLayoutMenu extends React.Component {
                 <span>
                   Üzenetek
                 </span>
-                {/* <Badge status="processing" offset={[10,-3]}/> */}
               </Link>
             </Menu.Item>
 
@@ -63,26 +61,6 @@ export default class AppLayoutMenu extends React.Component {
               <span>Helyszínek</span>
             </Link>
             </Menu.Item>
-
-           {/*
-          <SubMenu
-            key="sub1"
-            title={<span><Icon type="user" /><span>User</span></span>}
-          >
-            <Menu.Item key="3">Tom</Menu.Item>
-            <Menu.Item key="4">Bill</Menu.Item>
-            <Menu.Item key="5">Alex</Menu.Item>
-          </SubMenu>
-
-          <SubMenu
-            key="sub2"
-            title={<span><Icon type="team" /><span>Team</span></span>}
-          >
-            <Menu.Item key="6">Team 1</Menu.Item>
-            <Menu.Item key="8">Team 2</Menu.Item>
-          </SubMenu>
-          */}
-
         </Menu>
     )
   }

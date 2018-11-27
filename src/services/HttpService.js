@@ -5,6 +5,10 @@ class HttpService {
     this.config = {};
   }
 
+  destroyAuthToken() {
+    this.config = {};
+  }
+
   setAuthToken(token) {
     this.config = {
       headers: {

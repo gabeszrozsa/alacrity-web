@@ -1,7 +1,9 @@
 import AppLayout from './AppLayout';
-import LoadingBar from './LoadingBar';
+import DashboardRoute from './dashboard/DashboardLayout';
+import AuthRoute from './auth/AuthLayout';
 
 export {
   AppLayout,
-  LoadingBar,
+  DashboardRoute,
+  AuthRoute,
 };

@@ -1,12 +1,12 @@
 import React from 'react'
 import moment from 'moment'
-import { Divider, Icon, message } from 'antd';
+import { Divider, Icon, message, Form } from 'antd';
 
-import { LoadingBar } from '../../layout';
+import { LoadingBar } from '../../components';
 import { EventService, LocationService } from '../../api';
 import EventForm from './EventForm';
 
-export default class EditEvent extends React.Component {
+class EditEvent extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -81,3 +81,5 @@ export default class EditEvent extends React.Component {
     }
   }
 }
+const EditEventForm = Form.create()(EditEvent);
+export default EditEventForm;

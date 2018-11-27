@@ -2,53 +2,15 @@ import React, { Component } from 'react';
 import { Form } from 'antd';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
-import DashboardLayout from './dashboard/DashboardLayout';
-// import AuthLayout from './auth/AuthLayout';
+import { DashboardRoute, AuthRoute } from './';
 import AuthService from './../api/AuthService';
+import { NewsFeed, Messages, Events, Locations,
+  Activities, ActivityTypes, Login, Register } from '../screens';
 
-import { NewsFeed, Messages,
-  EventList, AddEvent, EditEvent, EventDetailsContainer,
-  Locations,
-  Activities, ActivityTypes, Auth } from '../screens';
-
-const AuthLayout = ({children, ...rest}) => {
-  return (
-    <div className="page page-login">
-      <div className="main">{children}</div>
-    </div>
-  )
-}
-
-
-const DashboardRoute = ({component: Component, ...rest}) => {
-  return (
-    <Route {...rest} render={matchProps => (
-      <DashboardLayout>
-          <Component {...matchProps} />
-      </DashboardLayout>
-    )} />
-  )
-};
-
-const AuthRoute = ({component: Component, ...rest}) => {
-  return (
-    <Route {...rest} render={matchProps => (
-      <AuthLayout>
-          <Component {...matchProps} />
-      </AuthLayout>
-    )} />
-  )
-};
 export default class AppLayout extends Component {
   render() {
-    const AddActivityTypeForm = Form.create()(ActivityTypes.Add);
-    const EditActivityTypeForm = Form.create()(ActivityTypes.Edit);
-
     const AddActivityForm = Form.create()(Activities.Add);
     const EditActivityForm = Form.create()(Activities.Edit);
-
-    const AddEventForm = Form.create()(AddEvent);
-    const EditEventForm = Form.create()(EditEvent);
 
     const AddLocationForm = Form.create()(Locations.Add);
     const EditLocationForm = Form.create()(Locations.Edit);
@@ -63,12 +25,13 @@ export default class AppLayout extends Component {
             { RedirectTo }
           </Route>
 
-          <AuthRoute exact path="/login" component={Auth}/>
+          <AuthRoute exact path="/login" component={Login}/>
+          <AuthRoute exact path="/register" component={Register}/>
 
-          <DashboardRoute exact path="/events" component={EventList} />
-          <DashboardRoute exact path="/events/add" component={AddEventForm} />
-          <DashboardRoute exact path="/events/edit/:id" component={EditEventForm} />
-          <DashboardRoute exact path="/events/:id" component={EventDetailsContainer} />
+          <DashboardRoute exact path="/events" component={Events.List} />
+          <DashboardRoute exact path="/events/add" component={Events.Add} />
+          <DashboardRoute exact path="/events/edit/:id" component={Events.Edit} />
+          <DashboardRoute exact path="/events/:id" component={Events.Details} />
 
           <DashboardRoute exact path="/locations" component={Locations.List} />
           <DashboardRoute exact path="/locations/add" component={AddLocationForm} />
@@ -81,8 +44,8 @@ export default class AppLayout extends Component {
           <DashboardRoute exact path="/activity/:id" component={Activities.Details} />
 
           <DashboardRoute exact path="/activity-types" component={ActivityTypes.List} />
-          <DashboardRoute exact path="/activity-types/add" component={AddActivityTypeForm} />
-          <DashboardRoute exact path="/activity-types/edit/:id" component={EditActivityTypeForm} />
+          <DashboardRoute exact path="/activity-types/add" component={ActivityTypes.Add} />
+          <DashboardRoute exact path="/activity-types/edit/:id" component={ActivityTypes.Edit} />
           <DashboardRoute exact path="/activity-types/:id" component={ActivityTypes.Details} />
 
           <DashboardRoute exact path="/news" component={NewsFeed} />

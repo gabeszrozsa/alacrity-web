@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Route, Redirect } from 'react-router-dom';
 import { Layout } from 'antd';
 import { Menu, Header } from './';
+import AuthService from '../../api/AuthService'
 
 const { Content, Footer, Sider } = Layout;
 
 const DashboardLayout = ({children, location, ...rest}) => {
   const path = children.props.location.pathname;
-  
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
 
@@ -16,7 +18,7 @@ const DashboardLayout = ({children, location, ...rest}) => {
       </Sider>
 
       <Layout>
-        <Header/>
+        <Header {...children.props}/>
         <Content className='app-content'>
           {children}
         </Content>
@@ -30,4 +32,14 @@ const DashboardLayout = ({children, location, ...rest}) => {
   )
 }
 
-export default DashboardLayout;
+const DashboardRoute = ({component: Component, ...rest}) => {
+  const isLoggedIn = AuthService.isLoggedIn();
+  return (
+    <Route {...rest} render={matchProps => isLoggedIn
+      ? (<DashboardLayout><Component {...matchProps} /></DashboardLayout>)
+      : (<Redirect to={{ pathname: '/login', state: { from: matchProps.location } }} />)
+    }/>
+  )
+};
+
+export default DashboardRoute;

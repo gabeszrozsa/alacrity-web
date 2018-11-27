@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { Divider, Icon, message } from 'antd';
 
-import { LoadingBar } from '../../layout';
+import { LoadingBar } from '../../components';
 import { ActivityService, ActivityTypeService, LocationService } from '../../api';
 import ActivityForm from './ActivityForm';
 

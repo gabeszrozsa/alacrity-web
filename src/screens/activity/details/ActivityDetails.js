@@ -2,7 +2,7 @@ import React from 'react'
 import { message } from 'antd';
 
 import { ActivityService, AuthService } from '../../../api';
-import { LoadingBar } from '../../../layout';
+import { LoadingBar } from './../../../components/';
 import ActivityDetailsPane from './ActivityDetailsPane';
 
 export default class ActivityDetails extends React.Component {

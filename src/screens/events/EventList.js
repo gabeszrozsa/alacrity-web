@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import { Link } from 'react-router-dom'
 
 import { EventService } from '../../api';
-import { LoadingBar } from '../../layout';
+import { LoadingBar } from '../../components';
 import EventThumbnail from './EventThumbnail';
 
 export default class EventList extends React.Component {

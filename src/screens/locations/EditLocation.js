@@ -1,7 +1,7 @@
 import React from 'react'
 import { Divider, Icon, message } from 'antd';
 
-import { LoadingBar } from '../../layout';
+import { LoadingBar } from '../../components';
 import { LocationService } from '../../api';
 import LocationForm from './LocationForm';
 

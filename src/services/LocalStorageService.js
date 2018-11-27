@@ -6,6 +6,10 @@ class LocalStorageService {
   getToken() {
     return localStorage.getItem('alacrity-token');
   }
+
+  clear() {
+    localStorage.clear();
+  }
 }
 
 const instance = new LocalStorageService();

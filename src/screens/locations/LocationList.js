@@ -3,7 +3,7 @@ import { Row, Col, Button } from 'antd';
 import { Link } from 'react-router-dom'
 
 import { LocationService } from '../../api';
-import { LoadingBar } from '../../layout';
+import { LoadingBar } from '../../components';
 import LocationThumbnail from './LocationThumbnail';
 
 export default class LocationList extends React.Component {

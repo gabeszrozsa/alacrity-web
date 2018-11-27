@@ -4,7 +4,7 @@ import { Row, Col, Tabs, Icon, message } from 'antd';
 import { MessageService, AuthService } from './../../api/';
 import MessageList from './MessageList';
 import MessageForm from './MessageForm';
-import { LoadingBar } from './../../layout/';
+import { LoadingBar } from './../../components/';
 import './messages.css';
 
 const TabPane = Tabs.TabPane;

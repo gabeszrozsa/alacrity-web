@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { ActivityTypeService } from '../../api';
-import { LoadingBar } from '../../layout';
+import { LoadingBar } from '../../components/';
 
 export default class ActivityTypeDetails extends React.Component {
   constructor() {

@@ -1,9 +1,9 @@
 import React from 'react'
-import { Divider, Icon, message } from 'antd';
+import { Divider, Icon, message, Form } from 'antd';
 import { ActivityTypeService } from '../../api';
 import ActivityTypeForm from './ActivityTypeForm';
 
-export default class AddActivityType extends React.Component {
+class AddActivityType extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
@@ -35,3 +35,6 @@ export default class AddActivityType extends React.Component {
     );
   }
 }
+
+const AddActivityTypeForm = Form.create()(AddActivityType);
+export default AddActivityTypeForm;

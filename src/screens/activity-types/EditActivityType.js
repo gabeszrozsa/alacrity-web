@@ -1,11 +1,11 @@
 import React from 'react'
-import { Divider, Icon, message } from 'antd';
+import { Divider, Icon, message, Form } from 'antd';
 
-import { LoadingBar } from '../../layout';
+import { LoadingBar } from '../../components';
 import { ActivityTypeService } from '../../api';
 import ActivityTypeForm from './ActivityTypeForm';
 
-export default class EditActivityType extends React.Component {
+class EditActivityType extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -63,3 +63,6 @@ export default class EditActivityType extends React.Component {
     }
   }
 }
+
+const EditActivityTypeForm = Form.create()(EditActivityType);
+export default EditActivityTypeForm;

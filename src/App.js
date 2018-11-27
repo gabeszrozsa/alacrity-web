@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import { AppLayout, LoadingBar } from './layout';
+import { AppLayout } from './layout';
+import { LoadingBar } from './components';
 import AuthService from './api/AuthService';
 
 export default class App extends Component {

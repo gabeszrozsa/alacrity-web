@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import { Link } from 'react-router-dom'
 
 import { ActivityService } from '../../../api';
-import { LoadingBar } from '../../../layout';
+import { LoadingBar } from './../../../components/';
 import ActivityTable from './ActivityTable';
 
 export default class ActivityList extends React.Component {

@@ -5,13 +5,12 @@ import { Redirect, Link } from 'react-router-dom'
 
 const FormItem = Form.Item;
 
-class Login extends React.Component {
+class Register extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        Auth.loginWithCredentials(values.email, values.password)
-        .then(() => this.props.history.push('/news'));
+        Auth.register(values).then(() => this.props.history.push('/news'));
       }
     });
   }
@@ -31,6 +30,13 @@ class Login extends React.Component {
               )}
             </FormItem>
             <FormItem>
+              {getFieldDecorator('displayName', {
+                rules: [{ required: true, message: 'Kérlek adj meg egy nevet!' }],
+              })(
+                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Név" />
+              )}
+            </FormItem>
+            <FormItem>
               {getFieldDecorator('password', {
                 rules: [{ required: true, message: 'Kérlek add meg a jelszavadat!' }],
               })(
@@ -39,10 +45,10 @@ class Login extends React.Component {
             </FormItem>
             <FormItem>
               <Button type="primary" htmlType="submit" className="login-form-button">
-                Belépés
-              </Button>
-              <Link to="/register">
                 Regisztráció
+              </Button>
+              <Link to="/login">
+                Belépés meglévő felhasználóval
               </Link>
             </FormItem>
           </Form>
@@ -52,5 +58,5 @@ class Login extends React.Component {
   }
 }
 
-const WrappedNormalLoginForm = Form.create()(Login);
-export default WrappedNormalLoginForm;
+const WrappedNormalRegisterForm = Form.create()(Register);
+export default WrappedNormalRegisterForm;
