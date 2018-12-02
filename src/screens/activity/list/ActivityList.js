@@ -28,8 +28,11 @@ export default class ActivityList extends React.Component {
       content = (<LoadingBar text="Tevékenységek betöltése..."/>);
     } else {
 
-      // TODO: empty text msg
-      content = <ActivityTable data={this.state.activities} history={this.props.history}/>;
+      if (this.state.activities.length > 0) {
+        content = <ActivityTable data={this.state.activities} history={this.props.history}/>;
+      } else {
+        content = <h2>Még nem rögzítettél egy tevékenységet sem.</h2>
+      }
     }
     return content;
   }
