@@ -79,15 +79,25 @@ const ActivityForm = (props) => {
         )}
       </FormItem>
 
+      <FormItem {...formItemLayout} label='Időtartam (óra)'>
+        {getFieldDecorator('durationHours', {})(
+          <InputNumber min={0}/>
+        )}
+      </FormItem>
+      <FormItem {...formItemLayout} label='Időtartam (perc)'>
+        {getFieldDecorator('durationMinutes', {})(
+          <InputNumber min={0} max={59}/>
+        )}
+      </FormItem>
       <FormItem {...formItemLayout} label='Időtartam (másodperc)'>
-        {getFieldDecorator('durationInSeconds', {})(
-          <InputNumber />
+        {getFieldDecorator('durationSeconds', {})(
+          <InputNumber min={0} max={59}/>
         )}
       </FormItem>
 
       <FormItem {...formItemLayout} label='Távolság (méter)'>
         {getFieldDecorator('distanceInMeters', {})(
-          <InputNumber />
+          <InputNumber min={0} />
         )}
       </FormItem>
 

@@ -5,6 +5,7 @@ import { Divider, Icon, message } from 'antd';
 import { LoadingBar } from '../../components';
 import { ActivityService, ActivityTypeService, LocationService } from '../../api';
 import ActivityForm from './ActivityForm';
+import { splitDurationInSeconds } from './../../utils/';
 
 export default class EditActivity extends React.Component {
   constructor() {
@@ -24,12 +25,15 @@ export default class EditActivity extends React.Component {
           activity: activity
         });
 
+        const { durationHours, durationMinutes, durationSeconds } = splitDurationInSeconds(activity.durationInSeconds);
         this.props.form.setFieldsValue({
           date: moment(activity.date),
           location_id: activity.location._id,
           activityType_id: activity.activityType._id,
           distanceInMeters: activity.distanceInMeters,
-          durationInSeconds: activity.durationInSeconds,
+          durationHours,
+          durationMinutes,
+          durationSeconds,
         })
     });
   }

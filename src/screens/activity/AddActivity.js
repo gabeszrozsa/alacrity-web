@@ -3,6 +3,7 @@ import { Divider, Icon, message } from 'antd';
 import { ActivityService, ActivityTypeService, LocationService } from '../../api';
 import { LoadingBar } from '../../components';
 import ActivityForm from './ActivityForm';
+import { convertDurationToSeconds } from './../../utils/';
 
 export default class AddActivity extends React.Component {
   constructor() {
@@ -18,7 +19,11 @@ export default class AddActivity extends React.Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        ActivityService.addNewActivity(values).then(id => {
+        const durationInSeconds = convertDurationToSeconds(values.durationHours, values.durationMinutes, values.durationSeconds);
+        const { activityType_id, date, distanceInMeters, location_id } = values;
+        const activityData = { activityType_id, date, distanceInMeters, location_id, durationInSeconds };
+
+        ActivityService.addNewActivity(activityData).then(id => {
           const redirectUrl = `/activity/${id}`;
           message.info('Tevékenység hozzáadva!');
           this.props.history.push(redirectUrl);
@@ -31,7 +36,18 @@ export default class AddActivity extends React.Component {
     Promise.all([
       this.fetchActivityTypes(),
       this.fetchLocations()
-    ]).then(res => this.setState({ isFetching: false }))
+    ]).then(res => {
+      this.setState({ isFetching: false });
+      this.fillDefaultDuration();
+    })
+  }
+
+  fillDefaultDuration = () => {
+    this.props.form.setFieldsValue({
+      durationHours: 0,
+      durationMinutes: 0,
+      durationSeconds: 0,
+    })
   }
 
   fetchLocations = () => {
