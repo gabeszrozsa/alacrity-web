@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Icon, Input, Button, Checkbox, Row, Col } from 'antd';
+import { Form, Icon, Input, Button, Checkbox, Row, Col, message } from 'antd';
 import Auth from '../../api/AuthService';
 import { Redirect, Link } from 'react-router-dom'
 
@@ -10,7 +10,9 @@ class Register extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        Auth.register(values).then(() => this.props.history.push('/news'));
+        Auth.register(values)
+          .then(() => this.props.history.push('/news'))
+          .catch(error => message.error('Ez az e-mail cím már foglalt!'));
       }
     });
   }
@@ -20,7 +22,7 @@ class Register extends React.Component {
 
     return (
       <Row>
-        <Col span={8} offset={8}>
+        <Col span={16} offset={4}>
           <Form onSubmit={this.handleSubmit} className="login-form">
             <FormItem>
               {getFieldDecorator('email', {

@@ -14,14 +14,6 @@ class AuthService {
     return this.user;
   }
 
-  logout() {
-    this.user = null;
-    Http.destroyAuthToken();
-    LocalStorageService.clear();
-
-    return Promise.resolve();
-  }
-
   handleAuthFlow = (user) => {
     this.user = user;
 
@@ -34,13 +26,23 @@ class AuthService {
   loginWithCredentials(email, password) {
     return Http.post('http://localhost:5000/api/users/login', { email, password })
     .then(this.handleAuthFlow)
-    .catch(error => console.error('AuthService -> loginWithCredentials:', error));
   }
 
   register(data) {
     return Http.post('http://localhost:5000/api/users/new', data)
     .then(this.handleAuthFlow)
-    .catch(error => console.error('AuthService -> register:', error));
+  }
+
+  logout() {
+    return Http.delete('http://localhost:5000/api/users/logout')
+      .then(() => {
+        this.user = null;
+        Http.destroyAuthToken();
+        LocalStorageService.clear();
+
+        Promise.resolve();
+      })
+      .catch(error => console.error('AuthService -> getAll:', error));
   }
 
   getCurrent() {
