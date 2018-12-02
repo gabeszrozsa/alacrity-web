@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import './login.css'
+import background from './background.jpg';
 
 const AuthLayout = ({children, ...rest}) => {
   return (
-    <div className="page page-login">
-      <h1>login</h1>
-      <div className="main">{children}</div>
+    <div className="auth">
+      <div className="auth-bg" style={{backgroundImage: `url(${background})`}}>
+        <div className="auth-divider"></div>
+      </div>
+      <div className="auth-form">
+        <h1 className="auth-title">Alacrity</h1>
+        {children}
+      </div>
     </div>
   )
 }
