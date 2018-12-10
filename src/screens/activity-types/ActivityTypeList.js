@@ -1,9 +1,12 @@
 import React from 'react'
-import { Button } from 'antd';
+import { Button, Card, Icon, Col, Row } from 'antd';
 import { Link } from 'react-router-dom'
 
 import { ActivityTypeService } from '../../api';
 import { LoadingBar } from '../../components';
+
+import './activity-type-thumbnail.css';
+const { Meta } = Card;
 
 export default class ActivityTypeList extends React.Component {
   constructor() {
@@ -29,9 +32,16 @@ export default class ActivityTypeList extends React.Component {
 
       // TODO: empty text msg
       content = this.state.activityTypes.map(activityType => (
-        <Link key={activityType._id} to={'/activity-types/' + activityType._id}>
-          <p>{activityType.name}</p>
-        </Link>
+        <Card key={activityType._id} className="activity-type-thumbnail"
+          actions={[
+            <Link to={'/activity-types/edit/' + activityType._id}><Icon type="edit" /> Szerkesztés</Link>,
+            <span style={{color: '#f5222d'}}><Icon type="delete" /> Törlés</span>,
+          ]}
+        >
+          <Meta
+            title={activityType.name}
+          />
+        </Card>
       ));
     }
     return content;
@@ -44,14 +54,20 @@ export default class ActivityTypeList extends React.Component {
 
     return (
       <React.Fragment>
-        <Link to="/activity-types/add">
-          <Button className='add-button' type="primary" icon="crown" size='large'>
-            Sportág rögzítése
-          </Button>
-        </Link>
-
-        { ActivityTypes }
-
+        <Row>
+          <Col span={24}>
+            <Link to="/activity-types/add">
+              <Button className='add-button' type="primary" icon="crown" size='large'>
+                Sportág rögzítése
+              </Button>
+            </Link>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={24}>
+            { ActivityTypes }
+          </Col>
+        </Row>
       </React.Fragment>
     )
   }
