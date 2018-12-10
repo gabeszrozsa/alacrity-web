@@ -5,7 +5,7 @@ import { Divider, Icon, message } from 'antd';
 import { LoadingBar } from '../../components';
 import { ActivityService, ActivityTypeService, LocationService } from '../../api';
 import ActivityForm from './ActivityForm';
-import { splitDurationInSeconds } from './../../utils/';
+import { splitDurationInSeconds, convertDurationToSeconds } from './../../utils/';
 
 export default class EditActivity extends React.Component {
   constructor() {
@@ -61,9 +61,13 @@ export default class EditActivity extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const id = this.props.match.params.id;
-    this.props.form.validateFieldsAndScroll((err, data) => {
+    this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        ActivityService.updateActivity(id, data)
+        const durationInSeconds = convertDurationToSeconds(values.durationHours, values.durationMinutes, values.durationSeconds);
+        const { activityType_id, date, distanceInMeters, location_id } = values;
+        const activityData = { activityType_id, date, distanceInMeters, location_id, durationInSeconds };
+
+        ActivityService.updateActivity(id, activityData)
           .then(result => {
             const redirectUrl = `/activity/${id}`;
             message.success('Tevékenység frissítve!');
