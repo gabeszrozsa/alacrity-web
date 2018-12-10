@@ -92,9 +92,9 @@ class Contents extends React.Component {
           center={position}
           centerAroundCurrentLocation={false}
           containerStyle={{
-            height: '600px',
+            height: '450px',
             position: 'relative',
-            width: '600px'
+            width: '450px'
           }}>
           <Marker position={position} />
         </Map>

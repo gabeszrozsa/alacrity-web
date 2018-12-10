@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from 'antd';
+import { Button, Col, Row } from 'antd';
 import { Link } from 'react-router-dom'
 
 import { EventService } from '../../api';
@@ -43,15 +43,20 @@ export default class EventList extends React.Component {
     //
     return (
       <React.Fragment>
-        <Link to="/events/add">
-          <Button className='add-button' type="primary" icon="schedule" size='large'>
-            Esemény szervezése
-          </Button>
-        </Link>
-
-        { Events }
-
-
+        <Row>
+          <Col span={24}>
+            <Link to="/events/add">
+              <Button className='add-button' type="primary" icon="schedule" size='large'>
+                Esemény szervezése
+              </Button>
+            </Link>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={24}>
+            { Events }
+          </Col>
+        </Row>
       </React.Fragment>
     )
   }
