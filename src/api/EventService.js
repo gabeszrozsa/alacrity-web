@@ -15,6 +15,12 @@ class EventService {
     .catch(error => console.error('EventService -> getAllEvents:', error));
   }
 
+  getRecentEvents() {
+    return Http.get(BASE_URL)
+    .then(res => res)
+    .catch(error => console.error('EventService -> getRecentEvents:', error));
+  }
+
   getEvent(id) {
     return Http.get(`${BASE_URL}/${id}`)
     .then(res => res)

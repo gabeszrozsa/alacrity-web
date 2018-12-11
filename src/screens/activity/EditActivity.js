@@ -21,15 +21,13 @@ export default class EditActivity extends React.Component {
   fetchActivity = () => {
     const id = this.props.match.params.id;
     ActivityService.getActivity(id).then(activity => {
-        this.setState({
-          activity: activity
-        });
+        this.setState({ activity });
 
         const { durationHours, durationMinutes, durationSeconds } = splitDurationInSeconds(activity.durationInSeconds);
         this.props.form.setFieldsValue({
           date: moment(activity.date),
-          location_id: activity.location._id,
-          activityType_id: activity.activityType._id,
+          location_id: activity.location_id._id,
+          activityType_id: activity.activityType_id._id,
           distanceInMeters: activity.distanceInMeters,
           durationHours,
           durationMinutes,
@@ -65,7 +63,10 @@ export default class EditActivity extends React.Component {
       if (!err) {
         const durationInSeconds = convertDurationToSeconds(values.durationHours, values.durationMinutes, values.durationSeconds);
         const { activityType_id, date, distanceInMeters, location_id } = values;
-        const activityData = { activityType_id, date, distanceInMeters, location_id, durationInSeconds };
+        const activityData = { activityType_id, date, distanceInMeters, location_id };
+        if (durationInSeconds > 0) {
+          activityData.durationInSeconds = durationInSeconds;
+        }
 
         ActivityService.updateActivity(id, activityData)
           .then(result => {

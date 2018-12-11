@@ -16,7 +16,7 @@ export default class ActivityList extends React.Component {
   }
 
   componentDidMount() {
-    ActivityService.getAllActivities().then(activities => this.setState({
+    ActivityService.getMyActivities().then(activities => this.setState({
       isFetching: false,
       activities: activities
     }));
@@ -39,8 +39,6 @@ export default class ActivityList extends React.Component {
 
   render () {
     const Activities = this.renderActivities();
-
-    // TODO: layout!!
 
     return (
       <React.Fragment>

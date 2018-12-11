@@ -21,7 +21,10 @@ export default class AddActivity extends React.Component {
       if (!err) {
         const durationInSeconds = convertDurationToSeconds(values.durationHours, values.durationMinutes, values.durationSeconds);
         const { activityType_id, date, distanceInMeters, location_id } = values;
-        const activityData = { activityType_id, date, distanceInMeters, location_id, durationInSeconds };
+        const activityData = { activityType_id, date, distanceInMeters, location_id };
+        if (durationInSeconds > 0) {
+          activityData.durationInSeconds = durationInSeconds;
+        }
 
         ActivityService.addNewActivity(activityData).then(id => {
           const redirectUrl = `/activity/${id}`;

@@ -28,9 +28,8 @@ export default class EventList extends React.Component {
       content = (<LoadingBar text="Helyszínek betöltése..."/>);
     } else {
 
-      // TODO: empty text msg
       content = this.state.events.map(ev => (
-          <EventThumbnail key={ev._id} ev={ev}/>
+          <EventThumbnail details edit attendees key={ev._id} ev={ev}/>
       ));
     }
     return content;

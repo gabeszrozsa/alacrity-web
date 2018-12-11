@@ -4,15 +4,11 @@ import { List, Avatar, Icon } from 'antd';
 import ActivityDetailsFooter from './ActivityDetailsFooter';
 import LocationMap from '../../../components/LocationMap';
 import { formatDistance, formatDuration, formatDate } from '../../../utils';
-import running from './icon_running.png';
+import { IconText, UserAvatar } from './../../../components/';
 
 const ActivityDetailsPane = (props) => {
-  const IconText = ({ type, text }) => (
-    <span>
-      <Icon type={type} style={{ marginRight: 8 }} />
-      {text}
-    </span>
-  );
+  const durationText = props.activity.durationInSeconds ? formatDuration(props.activity.durationInSeconds) : '-';
+  const distanceText = props.activity.distanceInMeters ? formatDistance(props.activity.distanceInMeters) : '-';
 
   return (
     <List
@@ -24,19 +20,19 @@ const ActivityDetailsPane = (props) => {
         <List.Item
           key={item._id}
           actions={[
-            <IconText type="rise" text={formatDistance(item.distanceInMeters)} />,
-            <IconText type="dashboard" text={formatDuration(item.durationInSeconds)} />
+            <IconText type="rise" text={durationText} />,
+            <IconText type="dashboard" text={distanceText} />
           ]}
           extra={
-            <LocationMap loc={item.location} width={'400px'} marker={false}/>
+            <LocationMap loc={item.location_id} width={'400px'} marker={false}/>
           }
         >
           <List.Item.Meta
-            avatar={<Avatar src={running} />}
-            title={item.activityType.name}
+            avatar={<UserAvatar displayName={item.createdBy.displayName}/>}
+            title={item.activityType_id.name}
             description={formatDate(item.date)}
           />
-        {item.location.name}
+          {item.location_id.name}
         </List.Item>
       )}
     />

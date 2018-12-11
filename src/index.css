@@ -83,3 +83,21 @@ tr.ant-table-row:hover {
     width: 600px !important;
     height: 600px !important;
 }
+
+
+.activity-thumbnail.ant-card {
+  width: 300px;
+  display: inline-block;
+  margin: 10px;
+}
+
+.activity-thumbnail.ant-card span.divider {
+  font-weight: bold;
+  margin-left: 8px;
+  margin-right: 10px;
+  opacity: 0.4;
+}
+
+.news-header-divider.ant-divider-horizontal.ant-divider-with-text {
+  color: #1890ff;
+}

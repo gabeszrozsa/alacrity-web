@@ -27,15 +27,15 @@ export default class ActivityTable extends React.Component {
         />
         <Column
           title="Sportág"
-          dataIndex="activityType"
-          key="activityType"
-          render={activityType => activityType.name}
+          dataIndex="activityType_id"
+          key="activityType_id"
+          render={activityType_id => activityType_id.name}
         />
         <Column
           title="Helyszín"
-          dataIndex="location"
-          key="location"
-          render={evt => evt.name}
+          dataIndex="location_id"
+          key="location_id"
+          render={location_id => location_id.name}
         />
         <Column
           title="Időtartam"

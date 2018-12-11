@@ -11,7 +11,7 @@ const UserAvatar = ({ displayName, size }) => {
     .toUpperCase();
 
   return (
-    <Avatar className="user-avatar" size={size || 'default'}>
+    <Avatar className="user-avatar" size={size || 'default'} title={displayName}>
       {monogram}
     </Avatar>
   );

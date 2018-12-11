@@ -15,6 +15,12 @@ class ActivityService {
     .catch(error => console.error('ActivityService -> getAllActivities:', error));
   }
 
+  getMyActivities() {
+    return Http.get(BASE_URL)
+    .then(res => res)
+    .catch(error => console.error('ActivityService -> getMyActivities:', error));
+  }
+
   getActivity(id) {
     return Http.get(`${BASE_URL}/${id}`)
     .then(res => res)
