@@ -16,7 +16,7 @@ class ActivityService {
   }
 
   getMyActivities() {
-    return Http.get(BASE_URL)
+    return Http.get(`${BASE_URL}/my`)
     .then(res => res)
     .catch(error => console.error('ActivityService -> getMyActivities:', error));
   }

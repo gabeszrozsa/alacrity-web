@@ -33,7 +33,7 @@ class EditActivityType extends React.Component {
       if (!err) {
         ActivityTypeService.updateActivityType(id, data)
           .then(result => {
-            const redirectUrl = `/activity-types/${id}`;
+            const redirectUrl = `/activity-types`;
             message.success('Sportág frissítve!');
             this.props.history.push(redirectUrl);
           });

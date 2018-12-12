@@ -9,7 +9,7 @@ class AddActivityType extends React.Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         ActivityTypeService.addNewActivityType(values).then(id => {
-          const redirectUrl = `/activity-types/${id}`;
+          const redirectUrl = `/activity-types/`;
           message.info('Sportág hozzáadva!');
           this.props.history.push(redirectUrl);
         });

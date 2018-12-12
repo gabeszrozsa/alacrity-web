@@ -16,7 +16,7 @@ class EventService {
   }
 
   getRecentEvents() {
-    return Http.get(BASE_URL)
+    return Http.get(`${BASE_URL}/recent`)
     .then(res => res)
     .catch(error => console.error('EventService -> getRecentEvents:', error));
   }

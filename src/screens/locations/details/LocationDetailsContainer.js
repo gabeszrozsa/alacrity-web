@@ -1,4 +1,5 @@
 import React from 'react'
+import { List } from 'antd';
 
 import { LocationService } from '../../../api';
 import { LoadingBar } from '../../../components';
@@ -25,13 +26,26 @@ export default class LocationDetails extends React.Component {
   renderLocation() {
     let content;
     if (this.state.isFetching) {
-      content = (<LoadingBar text="Fetching location..."/>);
+      content = (<LoadingBar text="Helyszín betöltése..."/>);
     } else {
-      // TODO: empty text msg
       content = (
         <React.Fragment>
-          <LocationThumbnail loc={this.state.loc}/>
-          <LocationMap loc={this.state.loc}/>
+          <List
+            itemLayout="vertical"
+            size="large"
+            dataSource={[this.state.loc]}
+            renderItem={item => (
+              <List.Item
+                key={item._id}
+              >
+                <List.Item.Meta
+                  title={item.name}
+                  description={<LocationMap loc={item}/>}
+                />
+              </List.Item>
+            )}
+          />
+
         </React.Fragment>
       );
     }

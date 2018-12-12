@@ -28,9 +28,13 @@ export default class EventList extends React.Component {
       content = (<LoadingBar text="Helyszínek betöltése..."/>);
     } else {
 
-      content = this.state.events.map(ev => (
+      if (this.state.events.length > 0) {
+        content = this.state.events.map(ev => (
           <EventThumbnail details edit attendees key={ev._id} ev={ev}/>
-      ));
+        ));
+      } else {
+        content = <h2>Még egy eseményt sem szerveztek.</h2>
+      }
     }
     return content;
   }

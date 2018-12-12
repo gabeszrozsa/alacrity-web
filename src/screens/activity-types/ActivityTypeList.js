@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Card, Icon, Col, Row } from 'antd';
+import { Button, Card, Icon, Col, Row, message } from 'antd';
 import { Link } from 'react-router-dom'
 
 import { ActivityTypeService } from '../../api';
@@ -18,10 +18,23 @@ export default class ActivityTypeList extends React.Component {
   }
 
   componentDidMount() {
+    this.fetchActivityTypes();
+  }
+
+  fetchActivityTypes = () => {
     ActivityTypeService.getAllActivityTypes().then(activityTypes => this.setState({
       isFetching: false,
       activityTypes: activityTypes
     }));
+  }
+
+  deleteActivityType = (id) => {
+    this.setState({ isFetching: true });
+    ActivityTypeService.deleteActivityType(id)
+      .then(() => {
+        message.success('Sportág törölve!');
+        this.fetchActivityTypes();
+      });
   }
 
   renderActivityTypes() {
@@ -30,27 +43,28 @@ export default class ActivityTypeList extends React.Component {
       content = (<LoadingBar text="Sportágak betöltése..."/>);
     } else {
 
-      // TODO: empty text msg
-      content = this.state.activityTypes.map(activityType => (
-        <Card key={activityType._id} className="activity-type-thumbnail"
-          actions={[
-            <Link to={'/activity-types/edit/' + activityType._id}><Icon type="edit" /> Szerkesztés</Link>,
-            <span style={{color: '#f5222d'}}><Icon type="delete" /> Törlés</span>,
-          ]}
-        >
-          <Meta
-            title={activityType.name}
-          />
-        </Card>
-      ));
+      if (this.state.activityTypes.length > 0) {
+        content = this.state.activityTypes.map(activityType => (
+          <Card key={activityType._id} className="activity-type-thumbnail"
+            actions={[
+              <Link to={'/activity-types/edit/' + activityType._id}><Icon type="edit" /> Szerkesztés</Link>,
+              <span onClick={() => this.deleteActivityType(activityType._id)} style={{color: '#f5222d'}}><Icon type="delete" /> Törlés</span>,
+            ]}
+            >
+              <Meta
+                title={activityType.name}
+              />
+            </Card>
+          ));
+      } else {
+        content = <h2>Még egy sportágat sem rögzítettek.</h2>
+      }
     }
     return content;
   }
 
   render () {
     const ActivityTypes = this.renderActivityTypes();
-
-    // TODO: layout!!
 
     return (
       <React.Fragment>
