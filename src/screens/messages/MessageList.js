@@ -11,15 +11,15 @@ const Title = ({ name, date }) => (
   </React.Fragment>
 )
 
-const MessageList = ({ messages }) => (
+const MessageList = ({ messages, partner }) => (
   <List
     itemLayout="horizontal"
     dataSource={messages}
     renderItem={item => (
       <List.Item>
         <List.Item.Meta
-          avatar={<UserAvatar displayName={item.partner.displayName} />}
-          title={<Title name={item.partner.displayName} date={item.createdAt} />}
+          avatar={<UserAvatar displayName={item[partner].displayName} />}
+          title={<Title name={item[partner].displayName} date={item.createdAt} />}
           description={item.text}
         />
       </List.Item>

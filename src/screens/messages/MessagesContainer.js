@@ -60,10 +60,10 @@ export default class MessagesContainer extends Component {
           <Col span={12}>
             <Tabs defaultActiveKey="1">
               <TabPane tab={<span><Icon type="inbox"/>Bejövő ({messages.received.length})</span>} key="1">
-                <MessageList messages={messages.received} />
+                <MessageList partner='createdBy' messages={messages.received} />
               </TabPane>
               <TabPane tab={<span><Icon type="arrow-right"/>Elküldött ({messages.sent.length})</span>} key="2">
-                <MessageList messages={messages.sent} />
+                <MessageList partner='recipient_id' messages={messages.sent} />
               </TabPane>
             </Tabs>
           </Col>
