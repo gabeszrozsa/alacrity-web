@@ -33,7 +33,7 @@ class Login extends React.Component {
             </FormItem>
             <FormItem>
               {getFieldDecorator('password', {
-                rules: [{ required: true, message: 'Kérlek add meg a jelszavadat!' }],
+                rules: [{ required: true, message: 'Kérlek add meg a jelszavadat (legalább 6 karakter)!', min: 6 }],
               })(
                 <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Jelszó" />
               )}

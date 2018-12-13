@@ -26,21 +26,21 @@ class Register extends React.Component {
           <Form onSubmit={this.handleSubmit} className="login-form">
             <FormItem>
               {getFieldDecorator('email', {
-                rules: [{ required: true, message: 'Kérlek add meg az e-mail címedet!' }],
+                rules: [{ required: true, message: 'Kérlek add meg az e-mail címedet!', min: 1 }],
               })(
                 <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="E-mail" />
               )}
             </FormItem>
             <FormItem>
               {getFieldDecorator('displayName', {
-                rules: [{ required: true, message: 'Kérlek adj meg egy nevet!' }],
+                rules: [{ required: true, message: 'Kérlek adj meg egy nevet!', min: 1 }],
               })(
                 <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Név" />
               )}
             </FormItem>
             <FormItem>
               {getFieldDecorator('password', {
-                rules: [{ required: true, message: 'Kérlek add meg a jelszavadat!' }],
+                rules: [{ required: true, message: 'A jelszónak legalább 6 karakternek kell lennie!',  min: 6 }],
               })(
                 <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Jelszó" />
               )}
